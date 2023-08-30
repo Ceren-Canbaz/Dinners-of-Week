@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
+import 'package:dinners_of_week/model/meal.dart';
+import 'package:dinners_of_week/repository/food_repository.dart';
 import 'package:equatable/equatable.dart';
-import 'package:user_list/model/meal.dart';
-import 'package:user_list/repository/food_repository.dart';
 
 part 'food_event.dart';
 part 'food_state.dart';

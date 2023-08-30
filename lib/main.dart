@@ -1,10 +1,12 @@
+import 'dart:io';
+
+import 'package:device_info_plus/device_info_plus.dart';
+import 'package:dinners_of_week/presentation/add_food_page.dart';
+import 'package:dinners_of_week/presentation/teams_page.dart';
+import 'package:dinners_of_week/repository/food_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:user_list/bloc/food_bloc.dart';
-import 'package:user_list/model/meal.dart';
-import 'package:user_list/presentation/add_food_page.dart';
-import 'package:user_list/repository/food_repository.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,13 +16,20 @@ void main() async {
       anonKey:
           "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im10Z29qcGl6Ym92enlncWZnc2RoIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTI0NzA3OTMsImV4cCI6MjAwODA0Njc5M30.M9buwHmxyH0_2TbZef6ijVAIwFBOi87wIoqcZp3UaYc",
       authFlowType: AuthFlowType.pkce);
-  runApp(MyApp());
+  DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+
+  if (Platform.isIOS) {
+    IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
+  } else if (Platform.isAndroid) {
+    AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+  }
+  runApp(const MyApp());
 }
 
 final supabase = Supabase.instance.client;
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
+  const MyApp({super.key});
 
   // This widget is the root of your application.
   @override
@@ -32,7 +41,7 @@ class MyApp extends StatelessWidget {
         ),
         home: RepositoryProvider(
           create: (context) => FoodRepository(),
-          child: AddFoodPage(),
+          child: TeamsPage(),
         ));
   }
 }

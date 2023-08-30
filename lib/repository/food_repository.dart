@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:user_list/main.dart';
-import 'package:user_list/model/meal.dart';
+import 'package:dinners_of_week/main.dart';
+import 'package:dinners_of_week/model/meal.dart';
 
 class FoodRepository {
   Future<List<Food>> getFoods() async {
@@ -25,7 +25,7 @@ class FoodRepository {
 
   void deleteFood({required Food food}) async {
     ///calismiyor
-    await supabase.from("foods").delete().eq("id", "${food.id}");
+    await supabase.from("foods").delete().eq("id", food.id);
 
     // foodList.remove(food);
   }
