@@ -1,4 +1,4 @@
-import 'package:dinners_of_week/bloc/food_bloc.dart';
+import 'package:dinners_of_week/bloc/food_bloc/food_bloc.dart';
 import 'package:dinners_of_week/model/meal.dart';
 import 'package:dinners_of_week/repository/food_repository.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +33,6 @@ class AddFoodPage extends StatelessWidget {
                       name: value,
                       hasDrink: false,
                       description: "test for json final");
-                  print(newFood.toJson());
 
                   BlocProvider.of<FoodBloc>(context)
                       .add(AddFoodEvent(newFood)); // Event'i tetikleyin
@@ -84,7 +83,7 @@ class AddFoodPage extends StatelessWidget {
               );
             }
 
-            return Center(child: Text("Error state"));
+            return const Center(child: Text("Error state"));
           },
         ),
       ),
