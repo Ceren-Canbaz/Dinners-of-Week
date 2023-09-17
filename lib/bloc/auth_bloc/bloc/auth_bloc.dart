@@ -18,7 +18,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       },
     );
     on<SignUpEvent>((event, emit) {
-      emit(AuthInitial());
+      try {
+        print("sign up bloc");
+        userRepository.signUp(event.auth);
+      } catch (e) {
+        print("errorrr signup");
+      }
     });
     on<SignUpInitialEvent>((event, emit) {
       emit(AuthInitial());
