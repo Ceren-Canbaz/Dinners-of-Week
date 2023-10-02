@@ -26,3 +26,11 @@ class SignUpEvent extends AuthEvent {
   @override
   List<Object> get props => [auth];
 }
+
+class SignUpSuccessEvent extends AuthEvent {
+  final Auth auth;
+
+  const SignUpSuccessEvent({required this.auth});
+  @override
+  List<Object> get props => [auth];
+}

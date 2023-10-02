@@ -21,8 +21,9 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          AuthBloc(UserRepositroy())..add(SignUpInitialEvent()),
+      create: (context) {
+        return AuthBloc(UserRepositroy())..add(SignUpInitialEvent());
+      },
       child: Scaffold(
         appBar: AppBar(
           title: const Text("Digitastic Food"),
@@ -48,6 +49,37 @@ class _SignUpPageState extends State<SignUpPage> {
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(6))),
               ),
+              BlocBuilder<AuthBloc, AuthState>(
+                builder: (context, state) {
+                  if (state == AuthErrorState) {
+                    return ElevatedButton(
+                      onPressed: () async {
+                        if (emailController.text.isNotEmpty &&
+                            passwordController.text.isNotEmpty &&
+                            userNameController.text.isNotEmpty) {
+                          setState(() {
+                            BlocProvider.of<AuthBloc>(context).add(
+                              SignUpEvent(
+                                auth: Auth(
+                                    email: emailController.text,
+                                    password: passwordController.text,
+                                    username: userNameController.text,
+                                    salt: ""),
+                              ),
+                            );
+                          });
+                        }
+                      },
+                      child: const Text(
+                        "Sign up",
+                        textAlign: TextAlign.center,
+                      ),
+                    );
+                  } else {
+                    return Container();
+                  }
+                },
+              ),
               const SizedBox(
                 height: 12,
               ),
@@ -60,12 +92,6 @@ class _SignUpPageState extends State<SignUpPage> {
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(6))),
               ),
-              // BlocBuilder<AuthBloc, AuthState>(
-              //   builder: (context, state) {
-              //     return ElevatedButton(
-              //         onPressed: () {}, child: Text("allaalla"));
-              //   },
-              // )
               BlocBuilder<AuthBloc, AuthState>(
                 builder: (context, state) {
                   return ElevatedButton(
@@ -74,12 +100,15 @@ class _SignUpPageState extends State<SignUpPage> {
                           passwordController.text.isNotEmpty &&
                           userNameController.text.isNotEmpty) {
                         setState(() {
-                          BlocProvider.of<AuthBloc>(context).add(SignUpEvent(
+                          BlocProvider.of<AuthBloc>(context).add(
+                            SignUpEvent(
                               auth: Auth(
                                   email: emailController.text,
                                   password: passwordController.text,
                                   username: userNameController.text,
-                                  salt: ""))); // Event'i
+                                  salt: ""),
+                            ),
+                          );
                         });
                       }
                     },
@@ -89,11 +118,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                   );
                 },
-              ),
-              Text("test ${passwordController.text}"),
-              Text("test ${passwordController.text}"),
-              Text("test ${passwordController.text}"),
-              Text("test ${passwordController.text}"),
+              )
             ],
           ),
         ),

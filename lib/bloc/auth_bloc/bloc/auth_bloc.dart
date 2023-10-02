@@ -19,10 +19,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     );
     on<SignUpEvent>((event, emit) {
       try {
-        print("sign up bloc");
         userRepository.signUp(event.auth);
       } catch (e) {
-        print("errorrr signup");
+        if (e is AuthException) {
+          print("AuthException Caught:");
+          print("Title: ${e.title}");
+          print("Message: ${e.message}");
+          emit(AuthErrorState(error: e.message));
+        } else {
+          // Diğer istisnaları işleyin veya yeniden fırlatın.
+        }
       }
     });
     on<SignUpInitialEvent>((event, emit) {
