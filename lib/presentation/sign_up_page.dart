@@ -44,7 +44,7 @@ class _SignUpPageState extends State<SignUpPage> {
               TextField(
                 controller: emailController,
                 decoration: InputDecoration(
-                    hintText: "Email",
+                    hintText: "Emaillll",
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(6))),
               ),
