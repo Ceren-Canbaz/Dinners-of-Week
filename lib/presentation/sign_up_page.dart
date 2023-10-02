@@ -53,6 +53,7 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
               TextField(
                 controller: passwordController,
+                onChanged: (value) {},
                 obscureText: true,
                 decoration: InputDecoration(
                     hintText: "Password",
