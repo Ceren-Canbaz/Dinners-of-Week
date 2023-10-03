@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:crypto/crypto.dart';
 import 'package:dinners_of_week/main.dart';
 import 'package:dinners_of_week/model/auth.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AuthException implements Exception {
   final String message;
@@ -22,15 +23,22 @@ class UserRepositroy {
 
       await supabase.from("users").insert(auth.toMap());
     } catch (e) {
-      // if (e.runtimeType.toString() == "PostgrestException") {
-      //   throw AuthException(
-      //       message: "Email alreaady exist", title: "Sign Up Error");
-      // } else {
-      //   throw Exception();
-      // }
+      throw PostgrestException(message: 'User already exist');
     }
   }
 }
+
+// abstract class Failure {
+//   final String message;
+
+//   Failure({required this.message});
+// }
+
+// class UserAlreadyExistFailure implements Failure {
+//   @override
+//   // TODO: implement message
+//   String get message => ""
+// }
 
 String generateSalt() {
   final random = Random.secure();

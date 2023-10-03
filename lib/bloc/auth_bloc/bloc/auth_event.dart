@@ -27,6 +27,14 @@ class SignUpEvent extends AuthEvent {
   List<Object> get props => [auth];
 }
 
+class SignUpErrorEvent extends AuthEvent {
+  final String message;
+
+  const SignUpErrorEvent({required this.message});
+  @override
+  List<Object> get props => [message];
+}
+
 class SignUpSuccessEvent extends AuthEvent {
   final Auth auth;
 

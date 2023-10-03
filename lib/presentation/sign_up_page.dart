@@ -51,29 +51,10 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
               BlocBuilder<AuthBloc, AuthState>(
                 builder: (context, state) {
-                  if (state == AuthErrorState) {
-                    return ElevatedButton(
-                      onPressed: () async {
-                        if (emailController.text.isNotEmpty &&
-                            passwordController.text.isNotEmpty &&
-                            userNameController.text.isNotEmpty) {
-                          setState(() {
-                            BlocProvider.of<AuthBloc>(context).add(
-                              SignUpEvent(
-                                auth: Auth(
-                                    email: emailController.text,
-                                    password: passwordController.text,
-                                    username: userNameController.text,
-                                    salt: ""),
-                              ),
-                            );
-                          });
-                        }
-                      },
-                      child: const Text(
-                        "Sign up",
-                        textAlign: TextAlign.center,
-                      ),
+                  if (state is AuthErrorState) {
+                    return Text(
+                      state.error,
+                      textAlign: TextAlign.center,
                     );
                   } else {
                     return Container();
@@ -110,6 +91,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             ),
                           );
                         });
+                        setState(() {});
                       }
                     },
                     child: const Text(
