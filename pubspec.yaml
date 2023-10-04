@@ -70,6 +70,7 @@ flutter:
   assets:
     - assets/digi_logo_pdf.png
     - .env
+    - assets/background2.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

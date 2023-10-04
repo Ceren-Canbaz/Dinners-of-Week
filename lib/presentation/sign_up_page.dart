@@ -1,23 +1,25 @@
 import 'package:dinners_of_week/bloc/auth_bloc/bloc/auth_bloc.dart';
 import 'package:dinners_of_week/model/auth.dart';
+import 'package:dinners_of_week/presentation/sign_in_page.dart';
 import 'package:dinners_of_week/repository/user_repositroy.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignUpPage extends StatefulWidget {
-  SignUpPage({super.key});
+  const SignUpPage({super.key});
 
   @override
   State<SignUpPage> createState() => _SignUpPageState();
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  final emailController = TextEditingController();
-
+  final Color bgprimary = const Color(0xFFA8C3C3);
+  final Color bgsecondary = const Color(0xFFCEE1E2);
+  final Color titlecolor = const Color(0xFF7dad94);
   final userNameController = TextEditingController();
-
+  bool passwordMatch = true;
   final passwordController = TextEditingController();
-
+  final password2Controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -25,92 +27,149 @@ class _SignUpPageState extends State<SignUpPage> {
         return AuthBloc(UserRepositroy())..add(SignUpInitialEvent());
       },
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text("Digitastic Food"),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: ListView(
-            children: [
-              TextField(
-                controller: userNameController,
-                decoration: InputDecoration(
-                    hintText: "Username ",
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(6))),
-              ),
-              const SizedBox(
-                height: 12,
-              ),
-              TextField(
-                controller: emailController,
-                decoration: InputDecoration(
-                    hintText: "Email",
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(6))),
-              ),
-              BlocBuilder<AuthBloc, AuthState>(
-                builder: (context, state) {
-                  if (state is AuthErrorState) {
-                    return Text(
-                      state.error,
-                      textAlign: TextAlign.center,
+        body: Container(
+          decoration: const BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage("assets/background2.jpeg"),
+                  fit: BoxFit.fill)),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 12.0),
+                  child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        "Sign Up",
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineLarge!
+                            .copyWith(
+                                color: titlecolor, fontWeight: FontWeight.w400),
+                      )),
+                ),
+                BlocBuilder<AuthBloc, AuthState>(
+                  builder: (context, state) {
+                    return TextField(
+                      controller: userNameController,
+                      decoration: textFieldDecoration(hintText: "Username"),
+                      onChanged: (value) {
+                        if (state is AuthErrorState) {
+                          BlocProvider.of<AuthBloc>(context)
+                              .add(SignUpInitialEvent());
+                        }
+                        final cleanedValue = value.replaceAll(" ", "");
+                        userNameController.text = cleanedValue;
+                      },
                     );
-                  } else {
-                    return Container();
-                  }
-                },
-              ),
-              const SizedBox(
-                height: 12,
-              ),
-              TextField(
-                controller: passwordController,
-                onChanged: (value) {},
-                obscureText: true,
-                decoration: InputDecoration(
-                    hintText: "Password",
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(6))),
-              ),
-              BlocBuilder<AuthBloc, AuthState>(
-                builder: (context, state) {
-                  return ElevatedButton(
-                    onPressed: () async {
-                      if (emailController.text.isNotEmpty &&
-                          passwordController.text.isNotEmpty &&
-                          userNameController.text.isNotEmpty) {
-                        setState(() {
-                          BlocProvider.of<AuthBloc>(context).add(
-                            SignUpEvent(
-                              auth: Auth(
-                                  email: emailController.text,
-                                  password: passwordController.text,
-                                  username: userNameController.text,
-                                  salt: ""),
-                            ),
-                          );
-                        });
-                        setState(() {});
-                      }
+                  },
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                TextField(
+                    controller: passwordController,
+                    onChanged: (value) {},
+                    obscureText: true,
+                    decoration: textFieldDecoration(hintText: "Password")),
+                const SizedBox(
+                  height: 12,
+                ),
+                TextField(
+                  controller: password2Controller,
+                  onChanged: (value) {
+                    if (passwordController.text == password2Controller.text) {
+                      passwordMatch = true;
+                    } else {
+                      passwordMatch = false;
+                    }
+                    setState(() {});
+                  },
+                  obscureText: true,
+                  decoration: textFieldDecoration(hintText: "Verify Password"),
+                ),
+                if (!passwordMatch) const Text("Passwords not match"),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: BlocBuilder<AuthBloc, AuthState>(
+                    builder: (context, state) {
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              if (state is AuthErrorState) Text(state.error),
+                              SizedBox(
+                                width: 300,
+                                child: ElevatedButton(
+                                  onPressed: passwordMatch &&
+                                          userNameController.text.isNotEmpty
+                                      ? () async {
+                                          if (passwordController
+                                                  .text.isNotEmpty &&
+                                              userNameController
+                                                  .text.isNotEmpty) {
+                                            setState(
+                                              () {
+                                                BlocProvider.of<AuthBloc>(
+                                                        context)
+                                                    .add(
+                                                  SignUpEvent(
+                                                    auth: Auth(
+                                                        password:
+                                                            passwordController
+                                                                .text,
+                                                        username:
+                                                            userNameController
+                                                                .text,
+                                                        salt: ""),
+                                                  ),
+                                                );
+                                              },
+                                            );
+                                          }
+                                        }
+                                      : null,
+                                  style: ElevatedButton.styleFrom(
+                                      primary: titlecolor),
+                                  child: Text(
+                                    "Sign up",
+                                    textAlign: TextAlign.center,
+                                    style:
+                                        Theme.of(context).textTheme.bodyMedium,
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ],
+                      );
                     },
-                    child: const Text(
-                      "Sign up",
-                      textAlign: TextAlign.center,
-                    ),
-                  );
-                },
-              )
-            ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
-
-        // body: BlocBuilder<AuthBloc, AuthState>(
-        //   builder: (context, state) {
-        //     return Container();
-        //   },
-        // ),
       ),
     );
+  }
+
+  InputDecoration textFieldDecoration({required String hintText}) {
+    return InputDecoration(
+        hintText: hintText,
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(6)),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(6),
+          borderSide: BorderSide(color: bgprimary, width: 1.5),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(6),
+          borderSide: BorderSide(color: bgsecondary, width: 1.5),
+        ));
   }
 }

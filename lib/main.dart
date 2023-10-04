@@ -35,7 +35,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Digitastic Food',
+      debugShowCheckedModeBanner: false,
+      title: 'Dinners of Week',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -46,6 +47,7 @@ class MyApp extends StatelessWidget {
       routes: {
         // Burada "signup" adında bir route tanımlıyoruz
         'signup': (context) => SignUpPage(),
+        'teamMenu': ((context) => TeamsPage())
       },
     );
   }

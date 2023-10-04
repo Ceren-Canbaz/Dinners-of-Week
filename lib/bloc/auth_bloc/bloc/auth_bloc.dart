@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:dinners_of_week/model/auth.dart';
 import 'package:dinners_of_week/repository/user_repositroy.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 part 'auth_event.dart';
@@ -21,6 +22,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<SignUpEvent>((event, emit) async {
       try {
         await userRepository.signUp(event.auth);
+        emit(AuthLoadedState(auth: event.auth));
       } on PostgrestException catch (e) {
         emit(AuthErrorState(error: e.message));
       } on Exception catch (e) {
