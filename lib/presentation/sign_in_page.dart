@@ -8,14 +8,14 @@ import 'package:flutter/src/widgets/framework.dart';
 
 import 'package:flutter/src/widgets/placeholder.dart';
 
-class TeamsPage extends StatefulWidget {
-  TeamsPage({super.key});
+class SignInPage extends StatefulWidget {
+  SignInPage({super.key});
 
   @override
-  State<TeamsPage> createState() => _TeamsPageState();
+  State<SignInPage> createState() => _SignInPageState();
 }
 
-class _TeamsPageState extends State<TeamsPage> {
+class _SignInPageState extends State<SignInPage> {
   final emailController = TextEditingController();
 
   final passwordController = TextEditingController();
@@ -27,89 +27,94 @@ class _TeamsPageState extends State<TeamsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage("assets/background2.jpeg"),
-                fit: BoxFit.fill)),
-        child: Center(
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(24.0),
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 12.0),
-                    child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          "Sign In",
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineLarge!
-                              .copyWith(
-                                  color: titlecolor,
-                                  fontWeight: FontWeight.w400),
-                        )),
-                  ),
-                  TextField(
-                      controller: emailController,
-                      decoration: textFieldDecoration(hintText: "Username")),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  TextField(
-                      controller: passwordController,
-                      obscureText: true,
-                      decoration: textFieldDecoration(hintText: "Password")),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  SizedBox(
-                    width: 300,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        secondResponse =
-                            hashPassword(emailController.text, salt);
-                        setState(() {});
-                      },
-                      style: ElevatedButton.styleFrom(primary: titlecolor),
-                      child: const Text(
-                        "Sign in",
+      body: WillPopScope(
+        onWillPop: () async {
+          return false;
+        },
+        child: Container(
+          height: MediaQuery.of(context).size.height,
+          decoration: const BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage("assets/background2.jpeg"),
+                  fit: BoxFit.fill)),
+          child: Center(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(24.0),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 12.0),
+                      child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            "Sign In",
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineLarge!
+                                .copyWith(
+                                    color: titlecolor,
+                                    fontWeight: FontWeight.w400),
+                          )),
+                    ),
+                    TextField(
+                        controller: emailController,
+                        decoration: textFieldDecoration(hintText: "Username")),
+                    const SizedBox(
+                      height: 12,
+                    ),
+                    TextField(
+                        controller: passwordController,
+                        obscureText: true,
+                        decoration: textFieldDecoration(hintText: "Password")),
+                    const SizedBox(
+                      height: 12,
+                    ),
+                    SizedBox(
+                      width: 300,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          secondResponse =
+                              hashPassword(emailController.text, salt);
+                          setState(() {});
+                        },
+                        style: ElevatedButton.styleFrom(primary: titlecolor),
+                        child: const Text(
+                          "Sign in",
+                        ),
                       ),
                     ),
-                  ),
-                  const Divider(
-                    color: Colors.black45,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Don't you have an account yet?",
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyLarge!
-                            .copyWith(color: titlecolor),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.of(context).pushNamed('/signup');
-                        },
-                        child: Text(
-                          "Sign Up",
+                    const Divider(
+                      color: Colors.black45,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Don't you have an account yet?",
                           style: Theme.of(context)
                               .textTheme
                               .bodyLarge!
-                              .copyWith(
-                                  color: titlecolor,
-                                  fontWeight: FontWeight.w700),
+                              .copyWith(color: titlecolor),
                         ),
-                      )
-                    ],
-                  ),
-                ],
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pushNamed('/signup');
+                          },
+                          child: Text(
+                            "Sign Up",
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyLarge!
+                                .copyWith(
+                                    color: titlecolor,
+                                    fontWeight: FontWeight.w700),
+                          ),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

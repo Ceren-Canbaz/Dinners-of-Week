@@ -43,12 +43,12 @@ class MyApp extends StatelessWidget {
       ),
       home: RepositoryProvider(
         create: (context) => UserRepositroy(),
-        child: TeamsPage(),
+        child: SignInPage(),
       ),
       routes: {
         // Burada "signup" adında bir route tanımlıyoruz
         '/signup': (context) => SignUpPage(),
-        '/teamMenu': ((context) => TeamsPage())
+        '/signIn': ((context) => SignInPage())
       },
     );
   }

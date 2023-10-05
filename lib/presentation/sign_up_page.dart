@@ -53,28 +53,20 @@ class _SignUpPageState extends State<SignUpPage> {
                                     fontWeight: FontWeight.w400),
                           )),
                     ),
-                    BlocConsumer<AuthBloc, AuthState>(
-                      builder: (context, state) {
-                        return TextField(
-                          controller: userNameController,
-                          decoration: textFieldDecoration(hintText: "Username"),
-                          onChanged: (value) {
-                            if (state is AuthErrorState) {
-                              BlocProvider.of<AuthBloc>(context)
-                                  .add(SignUpInitialEvent());
-                            }
-                            final cleanedValue = value.replaceAll(" ", "");
-                            userNameController.text = cleanedValue;
-                          },
-                        );
-                      },
-                      listener: (context, state) {
-                        if (state is AuthLoadedState) {
-                          Navigator.of(context)
-                              .pushReplacementNamed("/teamMenu");
-                        }
-                      },
-                    ),
+                    BlocBuilder<AuthBloc, AuthState>(builder: (context, state) {
+                      return TextField(
+                        controller: userNameController,
+                        decoration: textFieldDecoration(hintText: "Username"),
+                        onChanged: (value) {
+                          if (state is AuthErrorState) {
+                            BlocProvider.of<AuthBloc>(context)
+                                .add(SignUpInitialEvent());
+                          }
+                          final cleanedValue = value.replaceAll(" ", "");
+                          userNameController.text = cleanedValue;
+                        },
+                      );
+                    }),
                     const SizedBox(
                       height: 12,
                     ),
@@ -104,64 +96,95 @@ class _SignUpPageState extends State<SignUpPage> {
                     if (!passwordMatch) const Text("Passwords not match"),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: BlocBuilder<AuthBloc, AuthState>(
-                        builder: (context, state) {
-                          return Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  if (state is AuthErrorState)
-                                    Text(state.error),
-                                  SizedBox(
-                                    width: 300,
-                                    child: ElevatedButton(
-                                      onPressed: passwordMatch &&
-                                              userNameController.text.isNotEmpty
-                                          ? () async {
-                                              if (passwordController
-                                                      .text.isNotEmpty &&
-                                                  userNameController
-                                                      .text.isNotEmpty) {
-                                                setState(
-                                                  () {
-                                                    BlocProvider.of<AuthBloc>(
-                                                            context)
-                                                        .add(
-                                                      SignUpEvent(
-                                                        auth: Auth(
-                                                            password:
-                                                                passwordController
-                                                                    .text,
-                                                            username:
-                                                                userNameController
-                                                                    .text,
-                                                            salt: ""),
-                                                      ),
-                                                    );
-                                                  },
-                                                );
-                                              }
+                      child: BlocConsumer<AuthBloc, AuthState>(
+                          builder: (context, state) {
+                        return Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                if (state is AuthErrorState) Text(state.error),
+                                SizedBox(
+                                  width: 300,
+                                  child: ElevatedButton(
+                                    onPressed: passwordMatch &&
+                                            userNameController.text.isNotEmpty
+                                        ? () async {
+                                            if (passwordController
+                                                    .text.isNotEmpty &&
+                                                userNameController
+                                                    .text.isNotEmpty) {
+                                              setState(
+                                                () {
+                                                  BlocProvider.of<AuthBloc>(
+                                                          context)
+                                                      .add(
+                                                    SignUpEvent(
+                                                      auth: Auth(
+                                                          password:
+                                                              passwordController
+                                                                  .text,
+                                                          username:
+                                                              userNameController
+                                                                  .text,
+                                                          salt: ""),
+                                                    ),
+                                                  );
+                                                },
+                                              );
                                             }
-                                          : null,
-                                      style: ElevatedButton.styleFrom(
-                                          primary: titlecolor),
-                                      child: Text(
-                                        "Sign up",
-                                        textAlign: TextAlign.center,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyMedium,
-                                      ),
+                                          }
+                                        : null,
+                                    style: ElevatedButton.styleFrom(
+                                        primary: titlecolor),
+                                    child: Text(
+                                      "Sign up",
+                                      textAlign: TextAlign.center,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium,
                                     ),
-                                  )
-                                ],
-                              ),
-                            ],
-                          );
-                        },
-                      ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ],
+                        );
+                      }, listener: (context, state) {
+                        if (state is AuthLoadedState) {
+                          //navigate to teams page with user (auth)
+                          // Navigator.of(context)
+                          //     .pushReplacementNamed("/teamMenu");
+                        }
+                      }),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "You already have an account?",
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyLarge!
+                              .copyWith(color: titlecolor),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context)
+                                .pushReplacementNamed('/signIn');
+                          },
+                          child: Text(
+                            "Sign In",
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyLarge!
+                                .copyWith(
+                                    color: titlecolor,
+                                    fontWeight: FontWeight.w700),
+                          ),
+                        )
+                      ],
                     ),
                   ],
                 ),
