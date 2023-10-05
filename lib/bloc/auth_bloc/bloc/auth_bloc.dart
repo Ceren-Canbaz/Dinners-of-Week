@@ -22,7 +22,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<SignUpEvent>((event, emit) async {
       try {
         await userRepository.signUp(event.auth);
-        emit(AuthLoadedState(auth: event.auth));
+        emit(SignInState(auth: event.auth));
       } on PostgrestException catch (e) {
         emit(AuthErrorState(error: e.message));
       } on Exception catch (e) {
