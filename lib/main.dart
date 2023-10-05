@@ -5,6 +5,7 @@ import 'package:dinners_of_week/presentation/add_food_page.dart';
 import 'package:dinners_of_week/presentation/sign_in_page.dart';
 import 'package:dinners_of_week/presentation/sign_up_page.dart';
 import 'package:dinners_of_week/repository/food_repository.dart';
+import 'package:dinners_of_week/repository/user_repositroy.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -41,13 +42,13 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: RepositoryProvider(
-        create: (context) => FoodRepository(),
+        create: (context) => UserRepositroy(),
         child: TeamsPage(),
       ),
       routes: {
         // Burada "signup" adında bir route tanımlıyoruz
-        'signup': (context) => SignUpPage(),
-        'teamMenu': ((context) => TeamsPage())
+        '/signup': (context) => SignUpPage(),
+        '/teamMenu': ((context) => TeamsPage())
       },
     );
   }

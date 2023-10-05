@@ -69,7 +69,7 @@ class _TeamsPageState extends State<TeamsPage> {
             OutlinedButton(
               onPressed: () {
                 setState(() {});
-                Navigator.of(context).pushNamed('signup');
+                Navigator.of(context).pushNamed('/signup');
               },
               child: const Text("Sign Up"),
             ),

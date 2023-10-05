@@ -51,7 +51,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                 color: titlecolor, fontWeight: FontWeight.w400),
                       )),
                 ),
-                BlocBuilder<AuthBloc, AuthState>(
+                BlocConsumer<AuthBloc, AuthState>(
                   builder: (context, state) {
                     return TextField(
                       controller: userNameController,
@@ -65,6 +65,11 @@ class _SignUpPageState extends State<SignUpPage> {
                         userNameController.text = cleanedValue;
                       },
                     );
+                  },
+                  listener: (context, state) {
+                    if (state is AuthLoadedState) {
+                      Navigator.of(context).pushReplacementNamed("/teamMenu");
+                    }
                   },
                 ),
                 const SizedBox(
