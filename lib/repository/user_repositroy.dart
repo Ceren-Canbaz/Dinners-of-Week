@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:crypto/crypto.dart';
 import 'package:dinners_of_week/main.dart';
 import 'package:dinners_of_week/model/auth.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AuthException implements Exception {
@@ -14,6 +15,8 @@ class AuthException implements Exception {
 }
 
 class UserRepositroy {
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+
   Future<void> signUp(Auth auth) async {
     try {
       final salt = generateSalt();
@@ -22,8 +25,26 @@ class UserRepositroy {
       auth = auth.copyWith(password: hashedPassword, salt: salt);
 
       await supabase.from("users").insert(auth.toMap());
+
+      final prefs = await SharedPreferences.getInstance();
+      prefs.setString('dowUsername', auth.username);
     } catch (e) {
-      throw PostgrestException(message: 'User already exist');
+      throw const PostgrestException(message: 'User already exist');
+    }
+  }
+
+  Future<Auth> getUser(String username) async {
+    try {
+      final response = await supabase
+          .from('users') // Tablo adını buraya ekleyin
+          .select()
+          .eq('username', username); // 'email' sütunu ile eşleşen verileri al
+      final data = response as List<dynamic>;
+      final user = Auth.fromMap(data.first);
+      return user;
+    } catch (e) {
+      print("error $e");
+      throw Exception();
     }
   }
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:convert';
 
 class Auth {
   final String password;
@@ -24,11 +23,9 @@ class Auth {
     return Auth(
         password: map['password'] as String,
         username: map['username'] as String,
-        salt: map['salt'] as String);
+        salt: map['salted'] as String);
   }
 
-  factory Auth.fromJson(String source) =>
-      Auth.fromMap(json.decode(source) as Map<String, dynamic>);
   Auth copyWith(
       {String? email, String? password, String? username, String? salt}) {
     return Auth(

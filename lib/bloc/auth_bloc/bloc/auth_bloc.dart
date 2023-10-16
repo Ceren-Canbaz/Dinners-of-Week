@@ -11,12 +11,12 @@ part 'auth_state.dart';
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final UserRepositroy userRepository;
   AuthBloc(this.userRepository) : super(AuthInitial()) {
-    on<AuthEvent>((event, emit) async {
-      //shared preference ile girisini saglaman gerek tatlim.
-    });
+    on<AuthEvent>((event, emit) async {});
     on<SignInEvent>(
       (event, emit) async {
         emit(AuthInitial());
+
+        print(event.auth.username);
       },
     );
     on<SignUpEvent>((event, emit) async {

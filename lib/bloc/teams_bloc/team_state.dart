@@ -7,4 +7,6 @@ abstract class TeamState extends Equatable {
   List<Object> get props => [];
 }
 
-class TeamInitial extends TeamState {}
+class TeamInitial extends TeamState {} //loading proccess
+
+class TeamLoadedState extends TeamState {}

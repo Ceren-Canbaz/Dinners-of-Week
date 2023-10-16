@@ -157,7 +157,7 @@ class _SignInPageState extends State<SignInPage> {
 
     final response = sha256.convert([...saltBytes, ...passwordBytes]);
     setState(() {});
-    print("first response =$response");
+
     return response.toString();
   }
 

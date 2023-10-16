@@ -4,6 +4,8 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dinners_of_week/presentation/add_food_page.dart';
 import 'package:dinners_of_week/presentation/sign_in_page.dart';
 import 'package:dinners_of_week/presentation/sign_up_page.dart';
+import 'package:dinners_of_week/presentation/splash_page.dart';
+import 'package:dinners_of_week/presentation/teams_page.dart';
 import 'package:dinners_of_week/repository/food_repository.dart';
 import 'package:dinners_of_week/repository/user_repositroy.dart';
 import 'package:flutter/material.dart';
@@ -43,12 +45,13 @@ class MyApp extends StatelessWidget {
       ),
       home: RepositoryProvider(
         create: (context) => UserRepositroy(),
-        child: SignInPage(),
+        child: SplashPage(),
       ),
       routes: {
         // Burada "signup" adında bir route tanımlıyoruz
         '/signup': (context) => SignUpPage(),
-        '/signIn': ((context) => SignInPage())
+        '/signIn': ((context) => SignInPage()),
+        '/teams': (context) => TeamsPage(),
       },
     );
   }
