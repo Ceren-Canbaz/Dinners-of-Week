@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:crypto/crypto.dart';
 import 'package:dinners_of_week/bloc/auth_bloc/bloc/auth_bloc.dart';
+import 'package:dinners_of_week/model/auth.dart';
 import 'package:dinners_of_week/presentation/style/decoration.dart';
 import 'package:dinners_of_week/repository/user_repositroy.dart';
 import 'package:flutter/material.dart';
@@ -81,23 +82,36 @@ class _SignInPageState extends State<SignInPage> {
                       ),
                       BlocConsumer<AuthBloc, AuthState>(
                         listener: (context, state) {
-                          //navigate to teams page
+                          if (state is SignInState) {
+                            Navigator.of(context)
+                                .pushReplacementNamed("/teams");
+                          }
                         },
                         builder: (context, state) {
-                          return SizedBox(
-                            width: 300,
-                            child: ElevatedButton(
-                              onPressed: () {
-                                secondResponse =
-                                    hashPassword(emailController.text, salt);
-                                setState(() {});
-                              },
-                              style:
-                                  ElevatedButton.styleFrom(primary: titlecolor),
-                              child: const Text(
-                                "Sign in",
+                          return Column(
+                            children: [
+                              if (state is AuthErrorState) Text(state.error),
+                              SizedBox(
+                                width: 300,
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    BlocProvider.of<AuthBloc>(context).add(
+                                      SignInEvent(
+                                        auth: Auth(
+                                            password: passwordController.text,
+                                            username: emailController.text,
+                                            salt: ""),
+                                      ),
+                                    );
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                      primary: titlecolor),
+                                  child: const Text(
+                                    "Sign in",
+                                  ),
+                                ),
                               ),
-                            ),
+                            ],
                           );
                         },
                       ),

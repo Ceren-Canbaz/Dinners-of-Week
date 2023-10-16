@@ -14,9 +14,23 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<AuthEvent>((event, emit) async {});
     on<SignInEvent>(
       (event, emit) async {
-        emit(AuthInitial());
-
-        print(event.auth.username);
+        try {
+          final status = await userRepository.signIn(event.auth);
+          if (status) {
+            emit(
+              SignInState(auth: event.auth),
+            );
+          }
+        } on AuthStateException catch (e) {
+          print("alooooo ${e.message}");
+          emit(
+            AuthErrorState(
+              error: e.message,
+            ),
+          );
+        } on Exception catch (e) {
+          emit(const AuthErrorState(error: "Something went wrong"));
+        }
       },
     );
     on<SignUpEvent>((event, emit) async {

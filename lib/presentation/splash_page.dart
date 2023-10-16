@@ -70,12 +70,13 @@ class _SplashPageState extends State<SplashPage> {
     if (emailExists) {
       final username = prefs.getString('dowUsername');
       if (username != null) {
-        final bloc = AuthBloc(userRepositroy);
-
-        final auth = await userRepositroy.getUser(username);
-        bloc.add(SignInEvent(auth: auth));
+        final auth =
+            await userRepositroy.getUser(username); //send auth as argument
+        await Future.delayed(Duration(milliseconds: 750));
+        // // Navigator.of(context).pushReplacementNamed("/teams");
       }
     } else {
+      await Future.delayed(Duration(milliseconds: 750));
       Navigator.of(context).pushNamed('/signIn');
     }
   }

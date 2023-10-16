@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 class Auth {
   final String password;
   final String username;
-  final String salt;
+  final String? salt;
 
-  Auth({required this.password, required this.username, required this.salt});
+  Auth({required this.password, required this.username, this.salt});
 
   @override
   List<Object?> get props => [password, username];

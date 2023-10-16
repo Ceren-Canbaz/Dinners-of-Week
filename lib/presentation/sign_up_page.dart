@@ -154,8 +154,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       }, listener: (context, state) {
                         if (state is SignInState) {
                           //navigate to teams page with user (auth)
-                          // Navigator.of(context)
-                          //     .pushReplacementNamed("/teamMenu");
+                          Navigator.of(context).pushReplacementNamed("/teams");
                         }
                       }),
                     ),

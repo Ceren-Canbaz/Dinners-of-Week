@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ffi';
 import 'dart:math';
 
 import 'package:crypto/crypto.dart';
@@ -7,11 +8,11 @@ import 'package:dinners_of_week/model/auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-class AuthException implements Exception {
+class AuthStateException implements Exception {
   final String message;
   final String title;
 
-  AuthException({required this.message, required this.title});
+  AuthStateException({required this.message, required this.title});
 }
 
 class UserRepositroy {
@@ -33,7 +34,7 @@ class UserRepositroy {
     }
   }
 
-  Future<Auth> getUser(String username) async {
+  Future<Auth?> getUser(String username) async {
     try {
       final response = await supabase
           .from('users') // Tablo adını buraya ekleyin
@@ -41,10 +42,32 @@ class UserRepositroy {
           .eq('username', username); // 'email' sütunu ile eşleşen verileri al
       final data = response as List<dynamic>;
       final user = Auth.fromMap(data.first);
+
       return user;
     } catch (e) {
-      print("error $e");
       throw Exception();
+    }
+  }
+
+  Future<bool> signIn(Auth auth) async {
+    try {
+      final user = await getUser(auth.username);
+      if (user != null) {
+        final pass = hashPassword(auth.password, user.salt!);
+        print("hashlendi $pass");
+        if (user.password == pass) {
+          return true;
+        } else {
+          throw AuthStateException(
+              message: "Password or username incorrect",
+              title: "Password Failure");
+        }
+      } else {
+        throw AuthStateException(
+            message: "Username doesnt exist", title: "Username Failure");
+      }
+    } catch (e) {
+      rethrow;
     }
   }
 }
@@ -75,6 +98,6 @@ String hashPassword(String password, String salt) {
   final saltBytes = base64Url.decode(salt); // Buradaki decode'i kaldırın.
 
   final response = sha256.convert([...saltBytes, ...passwordBytes]);
-  print("first response =$response");
+
   return response.toString();
 }
