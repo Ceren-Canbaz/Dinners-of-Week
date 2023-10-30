@@ -48,20 +48,41 @@ class _TeamsPageState extends State<TeamsPage> {
                     Padding(
                       padding: const EdgeInsets.all(12.0),
                       child: Text(
-                        "Join a team",
+                        "Join a team!",
                         style: Theme.of(context)
                             .textTheme
                             .headlineSmall!
                             .copyWith(color: Colors.white),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 24.0,
-                      ),
-                      child: TextField(),
+                    Text(
+                      "Enter the team code your team shared with you, and don't miss out on anything",
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                          color: Colors.white, fontWeight: FontWeight.w300),
                     ),
-                    SizedBox(
+                    const SizedBox(
+                      height: 12,
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 64.0,
+                      ),
+                      child: TextField(
+                        cursorColor: Colors.white,
+                        decoration: InputDecoration(
+                          focusedBorder: UnderlineInputBorder(
+                            // Aktif durumdayken alt çizgi rengi
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
+                          enabledBorder: UnderlineInputBorder(
+                            // Pasif durumdayken alt çizgi rengi
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
                       height: 24,
                     )
                   ],
