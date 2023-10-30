@@ -1,4 +1,5 @@
 import 'package:dinners_of_week/bloc/auth_bloc/bloc/auth_bloc.dart';
+import 'package:dinners_of_week/model/auth.dart';
 import 'package:dinners_of_week/presentation/style/decoration.dart';
 import 'package:dinners_of_week/repository/user_repositroy.dart';
 import 'package:flutter/material.dart';
@@ -26,37 +27,47 @@ class _SplashPageState extends State<SplashPage> {
         return false;
       },
       child: Scaffold(
-        backgroundColor: bgprimary,
+        backgroundColor: beige,
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Icon(
-                Icons.dinner_dining_outlined,
-                size: 120,
-              ),
-              const SizedBox(
-                height: 24,
+              GestureDetector(
+                onLongPress: () async {
+                  final prefs = await SharedPreferences.getInstance();
+
+                  await prefs
+                      .remove('dowUsername'); // 'username' anahtarını siler
+                  setState(() {
+                    getAuth();
+                  });
+                },
+                child: Text(
+                  "Dinners",
+                  style: Theme.of(context).textTheme.headlineLarge!.copyWith(
+                        fontSize: 64,
+                        color: darkGreen,
+                        fontFamily: 'Agbalumo',
+                      ),
+                ),
               ),
               Text(
-                "Dinners of Week!",
-                style: Theme.of(context)
-                    .textTheme
-                    .headlineMedium!
-                    .copyWith(color: Colors.black),
+                "of",
+                style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                      fontSize: 54,
+                      color: darkGreen,
+                      fontFamily: 'Agbalumo',
+                    ),
               ),
-              TextButton(
-                  onPressed: () async {
-                    final prefs = await SharedPreferences.getInstance();
-
-                    await prefs
-                        .remove('dowUsername'); // 'username' anahtarını siler
-                    setState(() {
-                      getAuth();
-                    });
-                  },
-                  child: Text("Sil bunu"))
+              Text(
+                "Week!",
+                style: Theme.of(context).textTheme.headlineLarge!.copyWith(
+                      fontSize: 64,
+                      color: darkGreen,
+                      fontFamily: 'Agbalumo',
+                    ),
+              ),
             ],
           ),
         ),
@@ -70,10 +81,16 @@ class _SplashPageState extends State<SplashPage> {
     if (emailExists) {
       final username = prefs.getString('dowUsername');
       if (username != null) {
-        final auth =
-            await userRepositroy.getUser(username); //send auth as argument
-        await Future.delayed(Duration(milliseconds: 750));
-        // // Navigator.of(context).pushReplacementNamed("/teams");
+        try {
+          final auth =
+              await userRepositroy.getUser(username); //send auth as argument
+          if (auth.teamCode == "") {
+            Navigator.of(context)
+                .pushReplacementNamed("/teams", arguments: auth);
+          }
+        } catch (e) {
+          print("error while fetch user and team");
+        }
       }
     } else {
       await Future.delayed(Duration(milliseconds: 750));

@@ -22,7 +22,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             );
           }
         } on AuthStateException catch (e) {
-          print("alooooo ${e.message}");
           emit(
             AuthErrorState(
               error: e.message,

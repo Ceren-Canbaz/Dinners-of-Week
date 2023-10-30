@@ -20,6 +20,7 @@ class UserRepositroy {
 
   Future<void> signUp(Auth auth) async {
     try {
+      print(auth);
       final salt = generateSalt();
       final hashedPassword = hashPassword(auth.password, salt);
 
@@ -30,11 +31,12 @@ class UserRepositroy {
       final prefs = await SharedPreferences.getInstance();
       prefs.setString('dowUsername', auth.username);
     } catch (e) {
+      print("errorrrr $e");
       throw const PostgrestException(message: 'User already exist');
     }
   }
 
-  Future<Auth?> getUser(String username) async {
+  Future<Auth> getUser(String username) async {
     try {
       final response = await supabase
           .from('users') // Tablo adını buraya ekleyin
@@ -54,8 +56,10 @@ class UserRepositroy {
       final user = await getUser(auth.username);
       if (user != null) {
         final pass = hashPassword(auth.password, user.salt!);
-        print("hashlendi $pass");
+
         if (user.password == pass) {
+          final prefs = await SharedPreferences.getInstance();
+          prefs.setString('dowUsername', auth.username);
           return true;
         } else {
           throw AuthStateException(
