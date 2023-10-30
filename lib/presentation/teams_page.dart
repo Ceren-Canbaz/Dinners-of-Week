@@ -55,11 +55,14 @@ class _TeamsPageState extends State<TeamsPage> {
                             .copyWith(color: Colors.white),
                       ),
                     ),
-                    Text(
-                      "Enter the team code your team shared with you, and don't miss out on anything",
-                      textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                          color: Colors.white, fontWeight: FontWeight.w300),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        "Enter the team code your team shared with you, and don't miss out on anything",
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                            color: Colors.white, fontWeight: FontWeight.w300),
+                      ),
                     ),
                     const SizedBox(
                       height: 12,
@@ -88,8 +91,45 @@ class _TeamsPageState extends State<TeamsPage> {
                   ],
                 ),
               ),
-              const Card(
-                child: Text("Create Your Team"),
+              InkWell(
+                onTap: () {
+                  ///NAVIGATE TO  CREATE TEAM page
+                },
+                child: Card(
+                  color: darkGreen,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Text(
+                          "Create a Team!",
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineSmall!
+                              .copyWith(color: Colors.white),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          "If you want to make edits in the weekly meal planning and share it with your team, what are you waiting for? Quickly create a team and invite your team members!",
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyLarge!
+                              .copyWith(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w300),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      )
+                    ],
+                  ),
+                ),
               ),
               IconButton(
                   onPressed: () async {
