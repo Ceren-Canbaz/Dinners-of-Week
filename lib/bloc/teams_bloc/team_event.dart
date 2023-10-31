@@ -6,3 +6,13 @@ abstract class TeamEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class TeamInitialEvent extends TeamEvent {}
+
+class TeamCreateEvent extends TeamEvent {
+  final TeamModel team;
+
+  const TeamCreateEvent({required this.team});
+  @override
+  List<Object> get props => [team];
+}

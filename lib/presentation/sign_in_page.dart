@@ -25,7 +25,7 @@ class _SignInPageState extends State<SignInPage> {
         return AuthBloc(UserRepositroy())..add(SignInInitialEvent());
       },
       child: Scaffold(
-        backgroundColor: beige,
+        backgroundColor: eggshellColor,
         body: WillPopScope(
           onWillPop: () async {
             return false;
@@ -111,7 +111,7 @@ class _SignInPageState extends State<SignInPage> {
                           style: Theme.of(context)
                               .textTheme
                               .bodyLarge!
-                              .copyWith(color: brown),
+                              .copyWith(color: ligtBlueColor),
                         ),
                         TextButton(
                           onPressed: () {
@@ -123,7 +123,7 @@ class _SignInPageState extends State<SignInPage> {
                                 .textTheme
                                 .bodyLarge!
                                 .copyWith(
-                                    color: darkGreen,
+                                    color: brownSugarColor,
                                     fontWeight: FontWeight.w600),
                           ),
                         )

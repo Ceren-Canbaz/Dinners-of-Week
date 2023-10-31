@@ -27,7 +27,7 @@ class _SplashPageState extends State<SplashPage> {
         return false;
       },
       child: Scaffold(
-        backgroundColor: beige,
+        backgroundColor: eggshellColor,
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -47,7 +47,7 @@ class _SplashPageState extends State<SplashPage> {
                   "Dinners",
                   style: Theme.of(context).textTheme.headlineLarge!.copyWith(
                         fontSize: 64,
-                        color: darkGreen,
+                        color: ligtBlueColor,
                         fontFamily: 'Agbalumo',
                       ),
                 ),
@@ -56,7 +56,7 @@ class _SplashPageState extends State<SplashPage> {
                 "of",
                 style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                       fontSize: 54,
-                      color: darkGreen,
+                      color: ligtBlueColor,
                       fontFamily: 'Agbalumo',
                     ),
               ),
@@ -64,7 +64,7 @@ class _SplashPageState extends State<SplashPage> {
                 "Week!",
                 style: Theme.of(context).textTheme.headlineLarge!.copyWith(
                       fontSize: 64,
-                      color: darkGreen,
+                      color: ligtBlueColor,
                       fontFamily: 'Agbalumo',
                     ),
               ),

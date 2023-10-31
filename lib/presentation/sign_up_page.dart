@@ -25,7 +25,7 @@ class _SignUpPageState extends State<SignUpPage> {
         return AuthBloc(UserRepositroy())..add(SignUpInitialEvent());
       },
       child: Scaffold(
-        backgroundColor: beige,
+        backgroundColor: eggshellColor,
         body: Center(
           child: SingleChildScrollView(
             child: Padding(
@@ -44,14 +44,15 @@ class _SignUpPageState extends State<SignUpPage> {
                               .textTheme
                               .headlineLarge!
                               .copyWith(
-                                  color: brown, fontWeight: FontWeight.w400),
+                                  color: ligtBlueColor,
+                                  fontWeight: FontWeight.w400),
                         )),
                   ),
                   BlocBuilder<AuthBloc, AuthState>(builder: (context, state) {
                     return TextField(
                       controller: userNameController,
                       decoration: textFieldDecoration(
-                          hintText: "Username", color: brown),
+                          hintText: "Username", color: ligtBlueColor),
                       onChanged: (value) {
                         if (state is AuthErrorState) {
                           BlocProvider.of<AuthBloc>(context)
@@ -69,7 +70,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       controller: passwordController,
                       obscureText: true,
                       decoration: textFieldDecoration(
-                          hintText: "Password", color: brown)),
+                          hintText: "Password", color: ligtBlueColor)),
                   const SizedBox(
                     height: 12,
                   ),
@@ -85,7 +86,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     },
                     obscureText: true,
                     decoration: textFieldDecoration(
-                        hintText: "Verify Password", color: brown),
+                        hintText: "Verify Password", color: ligtBlueColor),
                   ),
                   if (!passwordMatch) const Text("Passwords not match"),
                   Padding(
@@ -131,8 +132,8 @@ class _SignUpPageState extends State<SignUpPage> {
                                           }
                                         }
                                       : null,
-                                  style:
-                                      ElevatedButton.styleFrom(primary: brown),
+                                  style: ElevatedButton.styleFrom(
+                                      primary: ligtBlueColor),
                                   child: Text(
                                     "Sign up",
                                     textAlign: TextAlign.center,
@@ -173,7 +174,8 @@ class _SignUpPageState extends State<SignUpPage> {
                               .textTheme
                               .bodyLarge!
                               .copyWith(
-                                  color: brown, fontWeight: FontWeight.w700),
+                                  color: brownSugarColor,
+                                  fontWeight: FontWeight.w700),
                         ),
                       )
                     ],

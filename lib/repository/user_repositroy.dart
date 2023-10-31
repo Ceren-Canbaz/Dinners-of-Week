@@ -31,7 +31,6 @@ class UserRepositroy {
       final prefs = await SharedPreferences.getInstance();
       prefs.setString('dowUsername', auth.username);
     } catch (e) {
-      print("errorrrr $e");
       throw const PostgrestException(message: 'User already exist');
     }
   }

@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:dinners_of_week/model/auth.dart';
 import 'package:dinners_of_week/repository/user_repositroy.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 part 'auth_event.dart';
