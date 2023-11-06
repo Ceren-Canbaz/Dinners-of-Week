@@ -124,6 +124,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                                         username:
                                                             userNameController
                                                                 .text,
+                                                        isAdmin: false,
                                                         salt: "",
                                                         teamCode: ""),
                                                   ),

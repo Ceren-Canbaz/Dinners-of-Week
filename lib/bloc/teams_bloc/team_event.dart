@@ -11,8 +11,9 @@ class TeamInitialEvent extends TeamEvent {}
 
 class TeamCreateEvent extends TeamEvent {
   final String teamName;
+  final Auth user;
 
-  const TeamCreateEvent({required this.teamName});
+  const TeamCreateEvent({required this.teamName, required this.user});
   @override
-  List<Object> get props => [teamName];
+  List<Object> get props => [teamName, user];
 }

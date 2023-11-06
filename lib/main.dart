@@ -5,6 +5,7 @@ import 'package:dinners_of_week/presentation/add_food_page.dart';
 import 'package:dinners_of_week/presentation/sign_in_page.dart';
 import 'package:dinners_of_week/presentation/sign_up_page.dart';
 import 'package:dinners_of_week/presentation/splash_page.dart';
+import 'package:dinners_of_week/presentation/team_home_page.dart';
 import 'package:dinners_of_week/presentation/teams_page.dart';
 import 'package:dinners_of_week/repository/food_repository.dart';
 import 'package:dinners_of_week/repository/user_repositroy.dart';
@@ -52,6 +53,7 @@ class MyApp extends StatelessWidget {
         '/signup': (context) => SignUpPage(),
         '/signIn': ((context) => SignInPage()),
         '/teams': (context) => TeamsPage(),
+        '/team_home': (context) => TeamHomePage()
       },
     );
   }

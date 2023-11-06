@@ -6,6 +6,7 @@ class Auth extends Equatable {
   final String id;
   final String password;
   final String username;
+  final bool? isAdmin;
   final String? salt;
   final String? teamCode;
 
@@ -13,6 +14,7 @@ class Auth extends Equatable {
       {required this.password,
       required this.username,
       required this.id,
+      this.isAdmin,
       this.salt,
       this.teamCode});
 
@@ -24,6 +26,7 @@ class Auth extends Equatable {
       'password': password,
       'username': username,
       'salted': salt,
+      'isAdmin': isAdmin,
       'teamsCode': teamCode
     };
   }
@@ -33,6 +36,7 @@ class Auth extends Equatable {
         id: map['id'] as String,
         password: map['password'] as String,
         username: map['username'] as String,
+        isAdmin: map['isAdmin'] as bool,
         salt: map['salted'] as String,
         teamCode: map['teamsCode'] ?? "");
   }
@@ -41,6 +45,7 @@ class Auth extends Equatable {
       {String? email,
       String? password,
       String? username,
+      bool? isAdmin,
       String? salt,
       String? teamCode}) {
     return Auth(
@@ -48,6 +53,7 @@ class Auth extends Equatable {
         password: password ?? this.password,
         username: username ?? this.username,
         salt: salt ?? this.salt,
+        isAdmin: isAdmin ?? this.isAdmin,
         teamCode: teamCode ?? this.teamCode);
   }
 }

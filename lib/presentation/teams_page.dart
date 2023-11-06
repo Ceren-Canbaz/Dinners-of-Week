@@ -33,7 +33,7 @@ class _TeamsPageState extends State<TeamsPage> {
                 Wrap(
                   children: [
                     Text(
-                      "Welcome",
+                      "Welcome ",
                       style: Theme.of(context)
                           .textTheme
                           .headlineLarge!
@@ -176,12 +176,19 @@ class _TeamsPageState extends State<TeamsPage> {
                               ),
                               child: BlocConsumer<TeamBloc, TeamState>(
                                   listener: (context, state) {
-                                print("state is $state");
+                                if (state is TeamCreatedState) {
+                                  Navigator.of(context).pushReplacementNamed(
+                                      "/team_home",
+                                      arguments: TeamHomePageParameters(
+                                          user: auth, team: state.team));
+                                }
                               }, builder: (context, state) {
                                 return TextField(
                                     onSubmitted: (value) async {
                                       BlocProvider.of<TeamBloc>(context).add(
-                                        TeamCreateEvent(teamName: value),
+                                        TeamCreateEvent(
+                                            teamName: value,
+                                            user: auth.copyWith(isAdmin: true)),
                                       );
                                     },
                                     cursorColor: Colors.white,
@@ -204,70 +211,6 @@ class _TeamsPageState extends State<TeamsPage> {
                     ),
                   ],
                 ),
-                // Card(
-                //   color: darkGreen,
-                //   child: Column(
-                //     mainAxisAlignment: MainAxisAlignment.center,
-                //     crossAxisAlignment: CrossAxisAlignment.center,
-                //     children: [
-                //       Padding(
-                //         padding: const EdgeInsets.all(12.0),
-                // child: Text(
-                //   "Create a Team!",
-                //   style: Theme.of(context)
-                //       .textTheme
-                //       .headlineSmall!
-                //       .copyWith(color: Colors.white),
-                // ),
-                //       ),
-                //       Padding(
-                //         padding: const EdgeInsets.all(8.0),
-                // child: Text(
-                //   "If you want to make edits in the weekly meal planning and share it with your team, what are you waiting for? Quickly create a team and invite your team members!",
-                //   textAlign: TextAlign.center,
-                //   style: Theme.of(context)
-                //       .textTheme
-                //       .bodyLarge!
-                //       .copyWith(
-                //           color: Colors.white,
-                //           fontWeight: FontWeight.w300),
-                // ),
-                //       ),
-                // Padding(
-                //   padding: const EdgeInsets.symmetric(
-                //     horizontal: 64.0,
-                //   ),
-                //   child: BlocConsumer<TeamBloc, TeamState>(
-                //     listener: (context, state) {
-                //       print("state is $state");
-                //     },
-                //     builder: (context, state) {
-                //       return TextField(
-                //         onSubmitted: (value) async {
-                //           BlocProvider.of<TeamBloc>(context).add(
-                //             TeamCreateEvent(
-                //                 team: TeamModel(id: "", name: value)),
-                //           );
-                //         },
-                //         cursorColor: Colors.white,
-                //         decoration: const InputDecoration(
-                //           focusedBorder: UnderlineInputBorder(
-                //             borderSide: BorderSide(color: Colors.white),
-                //           ),
-                //           enabledBorder: UnderlineInputBorder(
-                //             borderSide: BorderSide(color: Colors.white),
-                //           ),
-                //         ),
-                //       );
-                //     },
-                //   ),
-                //       ),
-                //       const SizedBox(
-                //         height: 24,
-                //       )
-                //     ],
-                //   ),
-                // ),
                 IconButton(
                     onPressed: () async {
                       final prefs = await SharedPreferences.getInstance();
@@ -286,4 +229,11 @@ class _TeamsPageState extends State<TeamsPage> {
       ),
     );
   }
+}
+
+class TeamHomePageParameters {
+  final Auth user;
+  final TeamModel team;
+
+  TeamHomePageParameters({required this.user, required this.team});
 }

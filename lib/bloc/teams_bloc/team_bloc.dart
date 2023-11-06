@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:dinners_of_week/model/auth.dart';
 import 'package:dinners_of_week/model/team.dart';
 import 'package:dinners_of_week/repository/teams_repository.dart';
 import 'package:equatable/equatable.dart';
@@ -14,7 +15,12 @@ class TeamBloc extends Bloc<TeamEvent, TeamState> {
       (event, emit) async {
         try {
           emit(TeamCreateLoadingState());
-          final status = await teamsRepository.createTeam(event.teamName);
+          final team = await teamsRepository.createTeam(event.teamName);
+          await teamsRepository.setCodeToUser(
+            user: event.user,
+            code: team.code,
+          );
+          emit(TeamCreatedState(team: team));
         } catch (e) {
           emit(const TeamCreateErrorState(message: "Something went wrong"));
         }

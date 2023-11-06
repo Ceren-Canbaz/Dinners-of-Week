@@ -18,7 +18,7 @@ class AuthStateException implements Exception {
 class UserRepositroy {
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
-  Future<void> signUp(Auth auth) async {
+  Future<Auth> signUp(Auth auth) async {
     try {
       print(auth);
       final salt = generateSalt();
@@ -30,6 +30,7 @@ class UserRepositroy {
 
       final prefs = await SharedPreferences.getInstance();
       prefs.setString('dowUsername', auth.username);
+      return await getUser(auth.username);
     } catch (e) {
       throw const PostgrestException(message: 'User already exist');
     }
