@@ -22,6 +22,7 @@ class TeamsRepository {
 
   Future<void> setCodeToUser({required Auth user, required String code}) async {
     try {
+      print("is admin ${user.isAdmin}");
       await supabase.from("users").update({
         "teamsCode": code,
         "isAdmin": user.isAdmin,

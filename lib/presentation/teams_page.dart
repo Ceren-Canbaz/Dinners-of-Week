@@ -180,7 +180,7 @@ class _TeamsPageState extends State<TeamsPage> {
                                   Navigator.of(context).pushReplacementNamed(
                                       "/team_home",
                                       arguments: TeamHomePageParameters(
-                                          user: auth, team: state.team));
+                                          user: state.user, team: state.team));
                                 }
                               }, builder: (context, state) {
                                 return TextField(

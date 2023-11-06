@@ -15,8 +15,8 @@ class TeamCreateLoadingState extends TeamState {}
 
 class TeamCreatedState extends TeamState {
   final TeamModel team;
-
-  TeamCreatedState({required this.team});
+  final Auth user;
+  TeamCreatedState({required this.team, required this.user});
   @override
   List<Object> get props => [team];
 }

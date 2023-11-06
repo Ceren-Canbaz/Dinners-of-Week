@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:bloc/bloc.dart';
 import 'package:dinners_of_week/model/auth.dart';
 import 'package:dinners_of_week/model/team.dart';
@@ -20,7 +22,9 @@ class TeamBloc extends Bloc<TeamEvent, TeamState> {
             user: event.user,
             code: team.code,
           );
-          emit(TeamCreatedState(team: team));
+
+          emit(TeamCreatedState(
+              team: team, user: event.user.copyWith(isAdmin: true)));
         } catch (e) {
           emit(const TeamCreateErrorState(message: "Something went wrong"));
         }
