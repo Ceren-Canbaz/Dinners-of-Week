@@ -181,9 +181,7 @@ class _TeamsPageState extends State<TeamsPage> {
                                 return TextField(
                                     onSubmitted: (value) async {
                                       BlocProvider.of<TeamBloc>(context).add(
-                                        TeamCreateEvent(
-                                            team:
-                                                TeamModel(id: "", name: value)),
+                                        TeamCreateEvent(teamName: value),
                                       );
                                     },
                                     cursorColor: Colors.white,

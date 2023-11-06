@@ -117,6 +117,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                                     .add(
                                                   SignUpEvent(
                                                     auth: Auth(
+                                                        id: "",
                                                         password:
                                                             passwordController
                                                                 .text,

@@ -14,7 +14,7 @@ class TeamBloc extends Bloc<TeamEvent, TeamState> {
       (event, emit) async {
         try {
           emit(TeamCreateLoadingState());
-          final status = await teamsRepository.createTeam(event.team.name);
+          final status = await teamsRepository.createTeam(event.teamName);
         } catch (e) {
           emit(const TeamCreateErrorState(message: "Something went wrong"));
         }

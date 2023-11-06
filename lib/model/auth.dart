@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
 class Auth extends Equatable {
-  // final String uuid;
+  final String id;
   final String password;
   final String username;
   final String? salt;
@@ -12,6 +12,7 @@ class Auth extends Equatable {
   Auth(
       {required this.password,
       required this.username,
+      required this.id,
       this.salt,
       this.teamCode});
 
@@ -29,6 +30,7 @@ class Auth extends Equatable {
 
   factory Auth.fromMap(Map<String, dynamic> map) {
     return Auth(
+        id: map['id'] as String,
         password: map['password'] as String,
         username: map['username'] as String,
         salt: map['salted'] as String,
@@ -42,6 +44,7 @@ class Auth extends Equatable {
       String? salt,
       String? teamCode}) {
     return Auth(
+        id: id,
         password: password ?? this.password,
         username: username ?? this.username,
         salt: salt ?? this.salt,

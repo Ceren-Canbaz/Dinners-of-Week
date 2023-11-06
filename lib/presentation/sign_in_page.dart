@@ -83,6 +83,7 @@ class _SignInPageState extends State<SignInPage> {
                                   BlocProvider.of<AuthBloc>(context).add(
                                     SignInEvent(
                                       auth: Auth(
+                                          id: "",
                                           password: passwordController.text,
                                           username: emailController.text,
                                           salt: ""),

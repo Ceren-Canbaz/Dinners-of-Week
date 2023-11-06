@@ -10,9 +10,9 @@ abstract class TeamEvent extends Equatable {
 class TeamInitialEvent extends TeamEvent {}
 
 class TeamCreateEvent extends TeamEvent {
-  final TeamModel team;
+  final String teamName;
 
-  const TeamCreateEvent({required this.team});
+  const TeamCreateEvent({required this.teamName});
   @override
-  List<Object> get props => [team];
+  List<Object> get props => [teamName];
 }

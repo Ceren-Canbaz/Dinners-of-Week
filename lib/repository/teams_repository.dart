@@ -1,14 +1,33 @@
+import 'dart:math';
+
 import 'package:dinners_of_week/main.dart';
 import 'package:dinners_of_week/model/team.dart';
 
 class TeamsRepository {
   Future<void> createTeam(String name) async {
+    final code = await createCode(name);
+
     try {
-      final team = TeamModel(id: "", name: name);
+      final team = TeamModel(id: "", name: name, code: code);
       final response =
           await supabase.from("teams").insert(team.toMap()).select();
     } catch (e) {
       throw Exception();
     }
+  }
+}
+
+Future<String> createCode(String name) async {
+  final random = Random();
+  const letters = '1234#?!';
+  final code = name.substring(0, 4).toUpperCase() +
+      String.fromCharCodes(Iterable.generate(
+          2, (_) => letters.codeUnitAt(random.nextInt(letters.length))));
+  final response =
+      await supabase.from("teams").select().eq('code', code).execute();
+  if (response.data.isEmpty) {
+    return code;
+  } else {
+    return await createCode(name);
   }
 }
