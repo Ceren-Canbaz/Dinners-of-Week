@@ -17,3 +17,12 @@ class TeamCreateEvent extends TeamEvent {
   @override
   List<Object> get props => [teamName, user];
 }
+
+class TeamJoinEvent extends TeamEvent {
+  final String teamCode;
+  final Auth user;
+
+  TeamJoinEvent({required this.teamCode, required this.user});
+  @override
+  List<Object> get props => [teamCode, user];
+}

@@ -27,7 +27,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             ),
           );
         } on Exception catch (e) {
-          emit(const AuthErrorState(error: "Something went wrong"));
+          emit(const AuthErrorState(error: "e"));
         }
       },
     );

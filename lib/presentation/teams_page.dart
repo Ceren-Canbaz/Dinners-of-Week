@@ -104,19 +104,32 @@ class _TeamsPageState extends State<TeamsPage> {
                             padding: const EdgeInsets.symmetric(
                               horizontal: 64.0,
                             ),
-                            child: TextField(
-                              onSubmitted: (value) {
-                                print(value);
+                            child: BlocConsumer<TeamBloc, TeamState>(
+                              listener: (context, state) {
+                                print(state.props);
                               },
-                              cursorColor: Colors.black,
-                              decoration: const InputDecoration(
-                                focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.white),
-                                ),
-                                enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.white),
-                                ),
-                              ),
+                              builder: (context, state) {
+                                return TextField(
+                                  onSubmitted: (value) {
+                                    BlocProvider.of<TeamBloc>(context).add(
+                                      TeamJoinEvent(
+                                          teamCode: value,
+                                          user: auth.copyWith(isAdmin: false)),
+                                    );
+                                  },
+                                  cursorColor: Colors.black,
+                                  decoration: const InputDecoration(
+                                    focusedBorder: UnderlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Colors.white),
+                                    ),
+                                    enabledBorder: UnderlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Colors.white),
+                                    ),
+                                  ),
+                                );
+                              },
                             ),
                           ),
                           const SizedBox(

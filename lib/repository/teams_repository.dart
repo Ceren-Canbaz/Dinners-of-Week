@@ -34,15 +34,34 @@ class TeamsRepository {
 
   Future<TeamModel> getTeam(String teamCode) async {
     try {
-      final response = await supabase
-          .from('teams') // Tablo adını buraya ekleyin
-          .select()
-          .eq('code', teamCode); // 'email' sütunu ile eşleşen verileri al
+      final response =
+          await supabase.from('teams').select().eq('code', teamCode);
       final data = response as List<dynamic>;
       final team = TeamModel.fromMap(data.first);
       return team;
     } catch (e) {
-      throw Exception();
+      throw Exception(e);
+    }
+  }
+
+  Future<TeamModel> joinTeam(
+      {required String teamCode, required Auth user}) async {
+    try {
+      final List<dynamic> response =
+          await supabase.from('teams').select().eq('code', teamCode).select();
+      if (response.isNotEmpty) {
+        final data = response as List<dynamic>;
+        final team = TeamModel.fromMap(data.first);
+        await supabase.from("users").update(
+            {"teamsCode": teamCode, "isAdmin": false}).eq("id", user.id);
+        return team;
+      } else {
+        throw Exception("Incorrect team code");
+      }
+
+      //update user
+    } catch (e) {
+      throw Exception(e);
     }
   }
 }

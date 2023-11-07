@@ -11,7 +11,7 @@ class TeamInitial extends TeamState {} //loading proccess
 
 class TeamLoadedState extends TeamState {}
 
-class TeamCreateLoadingState extends TeamState {}
+class TeamLoadingState extends TeamState {}
 
 class TeamCreatedState extends TeamState {
   final TeamModel team;
@@ -27,4 +27,17 @@ class TeamCreateErrorState extends TeamState {
   const TeamCreateErrorState({required this.message});
   @override
   List<Object> get props => [message];
+}
+
+class TeamJoinedState extends TeamState {
+  final TeamModel team;
+  final Auth user;
+
+  TeamJoinedState({required this.team, required this.user});
+}
+
+class TeamJoinErrorState extends TeamState {
+  final String message;
+
+  TeamJoinErrorState({required this.message});
 }

@@ -16,7 +16,7 @@ class TeamBloc extends Bloc<TeamEvent, TeamState> {
     on<TeamCreateEvent>(
       (event, emit) async {
         try {
-          emit(TeamCreateLoadingState());
+          emit(TeamLoadingState());
           final team = await teamsRepository.createTeam(event.teamName);
           await teamsRepository.setCodeToUser(
             user: event.user,
@@ -27,6 +27,19 @@ class TeamBloc extends Bloc<TeamEvent, TeamState> {
               team: team, user: event.user.copyWith(isAdmin: true)));
         } catch (e) {
           emit(const TeamCreateErrorState(message: "Something went wrong"));
+        }
+      },
+    );
+    on<TeamJoinEvent>(
+      (event, emit) async {
+        try {
+          emit(TeamLoadedState());
+          final team = await teamsRepository.joinTeam(
+              teamCode: event.teamCode, user: event.user);
+          print("team ${team}");
+        } catch (e) {
+          print("e $e");
+          emit(TeamJoinErrorState(message: e.toString()));
         }
       },
     );
