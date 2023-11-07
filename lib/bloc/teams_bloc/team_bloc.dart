@@ -36,7 +36,7 @@ class TeamBloc extends Bloc<TeamEvent, TeamState> {
           emit(TeamLoadedState());
           final team = await teamsRepository.joinTeam(
               teamCode: event.teamCode, user: event.user);
-          print("team ${team}");
+          emit(TeamJoinedState(team: team, user: event.user));
         } catch (e) {
           print("e $e");
           emit(TeamJoinErrorState(message: e.toString()));

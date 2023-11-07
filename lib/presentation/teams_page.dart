@@ -106,7 +106,13 @@ class _TeamsPageState extends State<TeamsPage> {
                             ),
                             child: BlocConsumer<TeamBloc, TeamState>(
                               listener: (context, state) {
-                                print(state.props);
+                                if (state is TeamJoinedState) {
+                                  print("buraya geliyo mu ya");
+                                  Navigator.of(context).pushReplacementNamed(
+                                      "/team_home",
+                                      arguments: TeamHomePageParameters(
+                                          user: state.user, team: state.team));
+                                }
                               },
                               builder: (context, state) {
                                 return TextField(
