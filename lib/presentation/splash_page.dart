@@ -4,6 +4,7 @@ import 'package:dinners_of_week/presentation/style/decoration.dart';
 import 'package:dinners_of_week/presentation/teams_page.dart';
 import 'package:dinners_of_week/repository/teams_repository.dart';
 import 'package:dinners_of_week/repository/user_repositroy.dart';
+import 'package:dinners_of_week/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -19,6 +20,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   final teamRepository = TeamsRepository();
   late final AnimationController _controller;
   late final Animation<double> _animation;
+  final AuthService _authService = AuthService();
 
   @override
   void initState() {
@@ -41,7 +43,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
     });
 
     _controller.forward();
-    getAuth();
+    _authService.authenticateUser(context);
     super.initState();
   }
 
@@ -69,32 +71,5 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
         ),
       ),
     );
-  }
-
-  Future<void> getAuth() async {
-    final prefs = await SharedPreferences.getInstance();
-    final emailExists = prefs.containsKey("dowUsername");
-    if (emailExists) {
-      final username = prefs.getString('dowUsername');
-      if (username != null) {
-        try {
-          final auth =
-              await userRepositroy.getUser(username); //send auth as argument
-          if (auth.teamCode == "") {
-            Navigator.of(context)
-                .pushReplacementNamed("/teams", arguments: auth);
-          } else {
-            final team = await teamRepository.getTeam(auth.teamCode!);
-            Navigator.of(context).pushReplacementNamed("/team_home",
-                arguments: TeamHomePageParameters(user: auth, team: team));
-          }
-        } catch (e) {
-          Navigator.of(context).pushNamed('/signIn');
-        }
-      }
-    } else {
-      await Future.delayed(const Duration(milliseconds: 750));
-      Navigator.of(context).pushNamed('/signIn');
-    }
   }
 }
