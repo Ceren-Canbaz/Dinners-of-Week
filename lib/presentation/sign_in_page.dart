@@ -90,8 +90,6 @@ class _SignInPageState extends State<SignInPage> {
                                     ),
                                   );
                                 },
-                                style: ElevatedButton.styleFrom(
-                                    primary: darkGreen),
                                 child: const Text(
                                   "Sign in",
                                 ),

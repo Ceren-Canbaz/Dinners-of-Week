@@ -20,7 +20,6 @@ class UserRepositroy {
 
   Future<Auth> signUp(Auth auth) async {
     try {
-      print(auth);
       final salt = generateSalt();
       final hashedPassword = hashPassword(auth.password, salt);
 

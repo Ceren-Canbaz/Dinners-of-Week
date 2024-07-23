@@ -134,8 +134,6 @@ class _SignUpPageState extends State<SignUpPage> {
                                           }
                                         }
                                       : null,
-                                  style: ElevatedButton.styleFrom(
-                                      primary: ligtBlueColor),
                                   child: Text(
                                     "Sign up",
                                     textAlign: TextAlign.center,
