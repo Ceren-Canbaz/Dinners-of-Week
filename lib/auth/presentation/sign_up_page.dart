@@ -26,7 +26,7 @@ class _SignUpPageState extends State<SignUpPage> {
         return AuthBloc(UserRepositroy())..add(SignUpInitialEvent());
       },
       child: Scaffold(
-        backgroundColor: eggshellColor,
+        backgroundColor: AppColors.eggshellColor,
         body: Center(
           child: SingleChildScrollView(
             child: Padding(
@@ -45,7 +45,7 @@ class _SignUpPageState extends State<SignUpPage> {
                               .textTheme
                               .headlineLarge!
                               .copyWith(
-                                  color: ligtBlueColor,
+                                  color: AppColors.ligtBlueColor,
                                   fontWeight: FontWeight.w400),
                         )),
                   ),
@@ -53,7 +53,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     return TextField(
                       controller: userNameController,
                       decoration: textFieldDecoration(
-                          hintText: "Username", color: ligtBlueColor),
+                          hintText: "Username", color: AppColors.ligtBlueColor),
                       onChanged: (value) {
                         if (state is AuthErrorState) {
                           BlocProvider.of<AuthBloc>(context)
@@ -71,7 +71,8 @@ class _SignUpPageState extends State<SignUpPage> {
                       controller: passwordController,
                       obscureText: true,
                       decoration: textFieldDecoration(
-                          hintText: "Password", color: ligtBlueColor)),
+                          hintText: "Password",
+                          color: AppColors.ligtBlueColor)),
                   const SizedBox(
                     height: 12,
                   ),
@@ -87,7 +88,8 @@ class _SignUpPageState extends State<SignUpPage> {
                     },
                     obscureText: true,
                     decoration: textFieldDecoration(
-                        hintText: "Verify Password", color: ligtBlueColor),
+                        hintText: "Verify Password",
+                        color: AppColors.ligtBlueColor),
                   ),
                   if (!passwordMatch) const Text("Passwords not match"),
                   Padding(
@@ -163,7 +165,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         style: Theme.of(context)
                             .textTheme
                             .bodyLarge!
-                            .copyWith(color: darkGreen),
+                            .copyWith(color: AppColors.darkGreen),
                       ),
                       TextButton(
                         onPressed: () {
@@ -175,7 +177,7 @@ class _SignUpPageState extends State<SignUpPage> {
                               .textTheme
                               .bodyLarge!
                               .copyWith(
-                                  color: brownSugarColor,
+                                  color: AppColors.brownSugarColor,
                                   fontWeight: FontWeight.w700),
                         ),
                       )

@@ -3,7 +3,9 @@ import 'dart:math';
 import 'package:dinners_of_week/main.dart';
 import 'package:dinners_of_week/auth/data/models/auth.dart';
 import 'package:dinners_of_week/team/data/models/team.dart';
+import 'package:dinners_of_week/team/data/models/team_food_dto.dart';
 
+///TODO: Move this methods to data layer and add dartz to repository
 class TeamsRepository {
   Future<TeamModel> createTeam(String name) async {
     final code = await createCode(name);
@@ -22,7 +24,6 @@ class TeamsRepository {
 
   Future<void> setCodeToUser({required Auth user, required String code}) async {
     try {
-      print("is admin ${user.isAdmin}");
       await supabase.from("users").update({
         "teamsCode": code,
         "isAdmin": user.isAdmin,
@@ -83,12 +84,20 @@ class TeamsRepository {
     }
   }
 
-  Future<void> getWeeklyFoodList({required String teamId}) async {
-    final response = await supabase
-        .from('weekly_food_detail')
-        .select('*')
-        .eq('teamId', teamId);
-    print(response);
+  Future<List<TeamFoodDetails>> getWeeklyFoodList(
+      {required String teamId}) async {
+    try {
+      final response = await supabase
+          .from('weekly_food_detail')
+          .select('*')
+          .eq('teamId', teamId) as List;
+
+      final foods =
+          response.map((item) => TeamFoodDetails.fromMap(item)).toList();
+      return foods;
+    } catch (e) {
+      rethrow;
+    }
   }
 }
 
@@ -96,8 +105,16 @@ Future<String> createCode(String name) async {
   final random = Random();
   const letters = '1234#?!';
   final code = name.substring(0, 4).toUpperCase() +
-      String.fromCharCodes(Iterable.generate(
-          2, (_) => letters.codeUnitAt(random.nextInt(letters.length))));
+      String.fromCharCodes(
+        Iterable.generate(
+          2,
+          (_) => letters.codeUnitAt(
+            random.nextInt(
+              letters.length,
+            ),
+          ),
+        ),
+      );
   final response =
       await supabase.from("teams").select().eq('code', code).execute();
   if (response.data.isEmpty) {

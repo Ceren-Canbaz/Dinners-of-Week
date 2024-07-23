@@ -1,8 +1,8 @@
 import 'package:equatable/equatable.dart';
 
 class TeamFoodDetails extends Equatable {
-  final int teamId;
-  final int foodId;
+  final String teamId;
+  final String foodId;
   final String foodName;
   final String foodDescription;
   final bool hasDrink;
@@ -21,10 +21,10 @@ class TeamFoodDetails extends Equatable {
     return TeamFoodDetails(
       teamId: map['teamId'],
       foodId: map['food_id'],
-      date: map["food_date"],
+      date: DateTime.parse(map['food_date']),
       foodName: map['food_name'],
       foodDescription: map['food_description'],
-      hasDrink: map['food_hasDrink'],
+      hasDrink: map['food_hasdrink'],
     );
   }
 

@@ -1,14 +1,25 @@
 import 'package:bloc/bloc.dart';
+import 'package:dinners_of_week/team/data/models/team_food_dto.dart';
 import 'package:dinners_of_week/team/domain/teams_repository.dart';
+import 'package:dinners_of_week/utils/enums/request_state.dart';
 import 'package:equatable/equatable.dart';
 
 part 'team_detail_state.dart';
 
 class TeamDetailCubit extends Cubit<TeamDetailState> {
   final TeamsRepository _repo;
-  TeamDetailCubit({required TeamsRepository repo})
+  final String _id;
+  TeamDetailCubit({required TeamsRepository repo, required String id})
       : _repo = repo,
-        super(const TeamDetailState());
+        _id = id,
+        super(
+          const TeamDetailState(
+            foods: [],
+            requestState: RequestState.initial,
+          ),
+        ) {
+    getWeeklyFoodList(teamId: _id);
+  }
   Future<void> addFootToCalendar() async {
     await _repo.addFoodTeamCalendar(
       teamId: "0417f581-7e87-4a52-8546-bc9808082a6c",
@@ -18,11 +29,25 @@ class TeamDetailCubit extends Cubit<TeamDetailState> {
   }
 
   Future<void> getWeeklyFoodList({required String teamId}) async {
-    await _repo.getWeeklyFoodList(teamId: teamId);
-    // final response = await supabase
-    //     .from('team_foods')
-    //     .select('foods (name)')
-    //     .eq('team_id', teamId)
-    //     .execute();
+    try {
+      emit(
+        state.copyWith(
+          requestState: RequestState.loading,
+        ),
+      );
+      final foods = await _repo.getWeeklyFoodList(teamId: teamId);
+      emit(
+        state.copyWith(
+          requestState: RequestState.loaded,
+          foods: foods,
+        ),
+      );
+    } catch (e) {
+      emit(
+        state.copyWith(
+          requestState: RequestState.error,
+        ),
+      );
+    }
   }
 }

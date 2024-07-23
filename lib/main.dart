@@ -1,6 +1,7 @@
 import 'package:dinners_of_week/auth/presentation/sign_in_page.dart';
 import 'package:dinners_of_week/auth/presentation/sign_up_page.dart';
 import 'package:dinners_of_week/splash/splash_page.dart';
+import 'package:dinners_of_week/style/colors.dart';
 
 import 'package:dinners_of_week/team/presentation/detail/team_detail_page.dart';
 import 'package:dinners_of_week/team/presentation/team/team_page.dart';
@@ -39,7 +40,24 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Dinners of Week',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: AppColors.eggshellColor,
+            foregroundColor: AppColors.grayColor,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12), // Kenarları yuvarlat
+            ),
+            padding: const EdgeInsets.symmetric(
+                vertical: 16, horizontal: 24), // İç boşluk
+            textStyle: const TextStyle(
+              fontSize: 16, // Yazı boyutu
+              fontWeight: FontWeight.bold, // Yazı kalınlığı
+            ),
+            elevation: 5, // Gölgeler
+            shadowColor: AppColors.grayColor
+                .withOpacity(0.5), // Gölge rengi ve şeffaflık
+          ),
+        ),
       ),
       home: RepositoryProvider(
         create: (context) => UserRepositroy(),
@@ -49,7 +67,10 @@ class MyApp extends StatelessWidget {
         '/signup': (context) => const SignUpPage(),
         '/signIn': ((context) => const SignInPage()),
         '/teams': (context) => const Team(),
-        '/team_home': (context) => const TeamHomePage()
+        '/team_home': (context) => TeamHomePage(
+              params: ModalRoute.of(context)!.settings.arguments
+                  as TeamHomePageParameters,
+            )
       },
     );
   }

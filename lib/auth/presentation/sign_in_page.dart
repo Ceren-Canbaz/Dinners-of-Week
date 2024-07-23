@@ -26,7 +26,7 @@ class _SignInPageState extends State<SignInPage> {
         return AuthBloc(UserRepositroy())..add(SignInInitialEvent());
       },
       child: Scaffold(
-        backgroundColor: eggshellColor,
+        backgroundColor: AppColors.eggshellColor,
         body: WillPopScope(
           onWillPop: () async {
             return false;
@@ -47,14 +47,14 @@ class _SignInPageState extends State<SignInPage> {
                                 .textTheme
                                 .headlineLarge!
                                 .copyWith(
-                                    color: darkGreen,
+                                    color: AppColors.darkGreen,
                                     fontWeight: FontWeight.w400),
                           )),
                     ),
                     TextField(
                         controller: emailController,
                         decoration: textFieldDecoration(
-                            hintText: "Username", color: darkGreen)),
+                            hintText: "Username", color: AppColors.darkGreen)),
                     const SizedBox(
                       height: 12,
                     ),
@@ -62,7 +62,7 @@ class _SignInPageState extends State<SignInPage> {
                         controller: passwordController,
                         obscureText: true,
                         decoration: textFieldDecoration(
-                            hintText: "Password", color: darkGreen)),
+                            hintText: "Password", color: AppColors.darkGreen)),
                     const SizedBox(
                       height: 12,
                     ),
@@ -101,7 +101,7 @@ class _SignInPageState extends State<SignInPage> {
                       },
                     ),
                     const Divider(
-                      color: darkGreen,
+                      color: AppColors.darkGreen,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -111,7 +111,7 @@ class _SignInPageState extends State<SignInPage> {
                           style: Theme.of(context)
                               .textTheme
                               .bodyLarge!
-                              .copyWith(color: ligtBlueColor),
+                              .copyWith(color: AppColors.ligtBlueColor),
                         ),
                         TextButton(
                           onPressed: () {
@@ -123,7 +123,7 @@ class _SignInPageState extends State<SignInPage> {
                                 .textTheme
                                 .bodyLarge!
                                 .copyWith(
-                                    color: brownSugarColor,
+                                    color: AppColors.brownSugarColor,
                                     fontWeight: FontWeight.w600),
                           ),
                         )

@@ -56,7 +56,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
         return false;
       },
       child: Scaffold(
-        backgroundColor: eggshellColor,
+        backgroundColor: AppColors.eggshellColor,
         body: Padding(
           padding: const EdgeInsets.all(12.0),
           child: Center(

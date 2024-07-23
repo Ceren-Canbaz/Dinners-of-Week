@@ -24,7 +24,7 @@ class _TeamState extends State<Team> {
         return TeamBloc(TeamsRepository())..add(TeamInitialEvent());
       },
       child: Scaffold(
-        backgroundColor: eggshellColor,
+        backgroundColor: AppColors.eggshellColor,
         body: WillPopScope(
           child: Padding(
             padding: const EdgeInsets.all(12.0),
@@ -38,7 +38,7 @@ class _TeamState extends State<Team> {
                           .textTheme
                           .headlineLarge!
                           .copyWith(
-                              color: ligtBlueColor,
+                              color: AppColors.ligtBlueColor,
                               fontWeight: FontWeight.w600),
                     ),
                     Text(
@@ -47,7 +47,8 @@ class _TeamState extends State<Team> {
                           .textTheme
                           .headlineLarge!
                           .copyWith(
-                              color: darkGreen, fontWeight: FontWeight.w200),
+                              color: AppColors.darkGreen,
+                              fontWeight: FontWeight.w200),
                     ),
                   ],
                 ),
@@ -61,7 +62,7 @@ class _TeamState extends State<Team> {
                     SizedBox(
                       width: MediaQuery.of(context).size.width,
                       child: Card(
-                        color: brownSugarColor,
+                        color: AppColors.brownSugarColor,
                         child: Padding(
                           padding: const EdgeInsets.all(12.0),
                           child: Center(
@@ -77,7 +78,7 @@ class _TeamState extends State<Team> {
                       ),
                     ),
                     Card(
-                      color: brownSugarColor.withOpacity(0.7),
+                      color: AppColors.brownSugarColor.withOpacity(0.7),
                       child: Column(
                         children: [
                           const SizedBox(
@@ -149,7 +150,7 @@ class _TeamState extends State<Team> {
                     SizedBox(
                       width: MediaQuery.of(context).size.width,
                       child: Card(
-                        color: ligtBlueColor,
+                        color: AppColors.ligtBlueColor,
                         child: Padding(
                           padding: const EdgeInsets.all(12.0),
                           child: Center(
@@ -165,7 +166,7 @@ class _TeamState extends State<Team> {
                       ),
                     ),
                     Card(
-                      color: ligtBlueColor.withOpacity(0.7),
+                      color: AppColors.ligtBlueColor.withOpacity(0.7),
                       child: Column(
                         children: [
                           const SizedBox(
