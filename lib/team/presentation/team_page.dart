@@ -1,20 +1,21 @@
-import 'package:dinners_of_week/team/presentation/teams_bloc/team_bloc.dart';
+import 'package:dinners_of_week/style/colors.dart';
+import 'package:dinners_of_week/team/presentation/team_bloc/team_bloc.dart';
 import 'package:dinners_of_week/auth/data/models/auth.dart';
 import 'package:dinners_of_week/team/data/models/team.dart';
-import 'package:dinners_of_week/style/decoration.dart';
+import 'package:dinners_of_week/style/input_decoration.dart';
 import 'package:dinners_of_week/team/domain/teams_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class TeamsPage extends StatefulWidget {
-  const TeamsPage({super.key});
+class Team extends StatefulWidget {
+  const Team({super.key});
 
   @override
-  State<TeamsPage> createState() => _TeamsPageState();
+  State<Team> createState() => _TeamState();
 }
 
-class _TeamsPageState extends State<TeamsPage> {
+class _TeamState extends State<Team> {
   @override
   Widget build(BuildContext context) {
     final auth = ModalRoute.of(context)!.settings.arguments as Auth;
@@ -107,7 +108,6 @@ class _TeamsPageState extends State<TeamsPage> {
                             child: BlocConsumer<TeamBloc, TeamState>(
                               listener: (context, state) {
                                 if (state is TeamJoinedState) {
-                                  print("buraya geliyo mu ya");
                                   Navigator.of(context).pushReplacementNamed(
                                       "/team_home",
                                       arguments: TeamHomePageParameters(

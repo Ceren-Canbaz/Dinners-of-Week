@@ -1,12 +1,8 @@
-import 'package:dinners_of_week/auth/presentation/auth_bloc/bloc/auth_bloc.dart';
-import 'package:dinners_of_week/auth/data/models/auth.dart';
-import 'package:dinners_of_week/style/decoration.dart';
-import 'package:dinners_of_week/team/presentation/teams_page.dart';
+import 'package:dinners_of_week/style/colors.dart';
 import 'package:dinners_of_week/team/domain/teams_repository.dart';
 import 'package:dinners_of_week/auth/domain/user_repositroy.dart';
 import 'package:dinners_of_week/auth/domain/services/auth_service.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});

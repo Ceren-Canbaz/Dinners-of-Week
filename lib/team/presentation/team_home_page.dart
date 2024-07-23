@@ -1,4 +1,4 @@
-import 'package:dinners_of_week/team/presentation/teams_page.dart';
+import 'package:dinners_of_week/team/presentation/team_page.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -16,7 +16,7 @@ class _TeamHomePageState extends State<TeamHomePage> {
         ModalRoute.of(context)!.settings.arguments as TeamHomePageParameters;
     return Scaffold(
       appBar: AppBar(
-        title: Text("Teams"),
+        title: Text(params.team.name),
         actions: [
           IconButton(
               onPressed: () async {
@@ -25,7 +25,7 @@ class _TeamHomePageState extends State<TeamHomePage> {
                 await prefs.remove('dowUsername');
                 setState(() {});
               },
-              icon: Icon(Icons.exit_to_app))
+              icon: const Icon(Icons.exit_to_app))
         ],
       ),
       body: ListView(children: [
