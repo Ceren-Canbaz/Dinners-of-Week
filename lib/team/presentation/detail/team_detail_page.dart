@@ -44,7 +44,9 @@ class _TeamHomePageState extends State<TeamHomePage> {
             builder: (context, state) {
               return ElevatedButton(
                 onPressed: () async {
-                  await context.read<TeamDetailCubit>().addFootToCalendar();
+                  await context.read<TeamDetailCubit>().getWeeklyFoodList(
+                        teamId: params.team.id,
+                      );
                 },
                 child: Text("add"),
               );

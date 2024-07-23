@@ -16,4 +16,13 @@ class TeamDetailCubit extends Cubit<TeamDetailState> {
       date: DateTime.now(),
     );
   }
+
+  Future<void> getWeeklyFoodList({required String teamId}) async {
+    await _repo.getWeeklyFoodList(teamId: teamId);
+    // final response = await supabase
+    //     .from('team_foods')
+    //     .select('foods (name)')
+    //     .eq('team_id', teamId)
+    //     .execute();
+  }
 }

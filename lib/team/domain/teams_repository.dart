@@ -79,9 +79,16 @@ class TeamsRepository {
         },
       );
     } catch (e) {
-      print(e);
       throw Exception();
     }
+  }
+
+  Future<void> getWeeklyFoodList({required String teamId}) async {
+    final response = await supabase
+        .from('weekly_food_detail')
+        .select('*')
+        .eq('teamId', teamId);
+    print(response);
   }
 }
 
