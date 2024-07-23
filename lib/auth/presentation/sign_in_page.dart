@@ -1,7 +1,7 @@
-import 'package:dinners_of_week/bloc/auth_bloc/bloc/auth_bloc.dart';
-import 'package:dinners_of_week/model/auth.dart';
-import 'package:dinners_of_week/presentation/style/decoration.dart';
-import 'package:dinners_of_week/repository/user_repositroy.dart';
+import 'package:dinners_of_week/auth/presentation/auth_bloc/bloc/auth_bloc.dart';
+import 'package:dinners_of_week/auth/data/models/auth.dart';
+import 'package:dinners_of_week/style/decoration.dart';
+import 'package:dinners_of_week/auth/domain/user_repositroy.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';

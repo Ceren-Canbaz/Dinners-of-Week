@@ -1,8 +1,8 @@
 import 'dart:math';
 
 import 'package:dinners_of_week/main.dart';
-import 'package:dinners_of_week/model/auth.dart';
-import 'package:dinners_of_week/model/team.dart';
+import 'package:dinners_of_week/auth/data/models/auth.dart';
+import 'package:dinners_of_week/team/data/models/team.dart';
 
 class TeamsRepository {
   Future<TeamModel> createTeam(String name) async {

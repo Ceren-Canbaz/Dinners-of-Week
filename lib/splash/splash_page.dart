@@ -1,10 +1,10 @@
-import 'package:dinners_of_week/bloc/auth_bloc/bloc/auth_bloc.dart';
-import 'package:dinners_of_week/model/auth.dart';
-import 'package:dinners_of_week/presentation/style/decoration.dart';
-import 'package:dinners_of_week/presentation/teams_page.dart';
-import 'package:dinners_of_week/repository/teams_repository.dart';
-import 'package:dinners_of_week/repository/user_repositroy.dart';
-import 'package:dinners_of_week/services/auth_service.dart';
+import 'package:dinners_of_week/auth/presentation/auth_bloc/bloc/auth_bloc.dart';
+import 'package:dinners_of_week/auth/data/models/auth.dart';
+import 'package:dinners_of_week/style/decoration.dart';
+import 'package:dinners_of_week/team/presentation/teams_page.dart';
+import 'package:dinners_of_week/team/domain/teams_repository.dart';
+import 'package:dinners_of_week/auth/domain/user_repositroy.dart';
+import 'package:dinners_of_week/auth/domain/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

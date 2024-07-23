@@ -1,14 +1,14 @@
 import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
-import 'package:dinners_of_week/presentation/add_food_page.dart';
-import 'package:dinners_of_week/presentation/sign_in_page.dart';
-import 'package:dinners_of_week/presentation/sign_up_page.dart';
-import 'package:dinners_of_week/presentation/splash_page.dart';
-import 'package:dinners_of_week/presentation/team_home_page.dart';
-import 'package:dinners_of_week/presentation/teams_page.dart';
-import 'package:dinners_of_week/repository/food_repository.dart';
-import 'package:dinners_of_week/repository/user_repositroy.dart';
+import 'package:dinners_of_week/food/presentation/add_food_page.dart';
+import 'package:dinners_of_week/auth/presentation/sign_in_page.dart';
+import 'package:dinners_of_week/auth/presentation/sign_up_page.dart';
+import 'package:dinners_of_week/splash/splash_page.dart';
+import 'package:dinners_of_week/team/presentation/team_home_page.dart';
+import 'package:dinners_of_week/team/presentation/teams_page.dart';
+import 'package:dinners_of_week/food/domain/food_repository.dart';
+import 'package:dinners_of_week/auth/domain/user_repositroy.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';

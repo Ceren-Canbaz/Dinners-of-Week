@@ -1,7 +1,6 @@
-import 'package:dinners_of_week/model/auth.dart';
-import 'package:dinners_of_week/presentation/teams_page.dart';
-import 'package:dinners_of_week/repository/teams_repository.dart';
-import 'package:dinners_of_week/repository/user_repositroy.dart';
+import 'package:dinners_of_week/team/presentation/teams_page.dart';
+import 'package:dinners_of_week/team/domain/teams_repository.dart';
+import 'package:dinners_of_week/auth/domain/user_repositroy.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

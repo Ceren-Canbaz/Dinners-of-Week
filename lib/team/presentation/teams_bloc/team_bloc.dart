@@ -1,9 +1,9 @@
 import 'dart:ffi';
 
 import 'package:bloc/bloc.dart';
-import 'package:dinners_of_week/model/auth.dart';
-import 'package:dinners_of_week/model/team.dart';
-import 'package:dinners_of_week/repository/teams_repository.dart';
+import 'package:dinners_of_week/auth/data/models/auth.dart';
+import 'package:dinners_of_week/team/data/models/team.dart';
+import 'package:dinners_of_week/team/domain/teams_repository.dart';
 import 'package:equatable/equatable.dart';
 
 part 'team_event.dart';

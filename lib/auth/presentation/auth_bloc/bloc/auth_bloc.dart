@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:dinners_of_week/model/auth.dart';
-import 'package:dinners_of_week/repository/user_repositroy.dart';
+import 'package:dinners_of_week/auth/data/models/auth.dart';
+import 'package:dinners_of_week/auth/domain/user_repositroy.dart';
 import 'package:equatable/equatable.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 

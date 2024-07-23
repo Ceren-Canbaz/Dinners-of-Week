@@ -4,7 +4,7 @@ import 'dart:math';
 
 import 'package:crypto/crypto.dart';
 import 'package:dinners_of_week/main.dart';
-import 'package:dinners_of_week/model/auth.dart';
+import 'package:dinners_of_week/auth/data/models/auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 

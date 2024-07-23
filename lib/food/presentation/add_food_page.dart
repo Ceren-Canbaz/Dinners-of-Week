@@ -1,9 +1,8 @@
-import 'package:dinners_of_week/bloc/food_bloc/food_bloc.dart';
-import 'package:dinners_of_week/model/meal.dart';
-import 'package:dinners_of_week/repository/food_repository.dart';
+import 'package:dinners_of_week/food/presentation/food_bloc/food_bloc.dart';
+import 'package:dinners_of_week/food/data/models/food.dart';
+import 'package:dinners_of_week/food/domain/food_repository.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AddFoodPage extends StatelessWidget {
