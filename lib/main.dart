@@ -1,13 +1,10 @@
-import 'dart:io';
-
-import 'package:device_info_plus/device_info_plus.dart';
-import 'package:dinners_of_week/food/presentation/add_food_page.dart';
 import 'package:dinners_of_week/auth/presentation/sign_in_page.dart';
 import 'package:dinners_of_week/auth/presentation/sign_up_page.dart';
 import 'package:dinners_of_week/splash/splash_page.dart';
-import 'package:dinners_of_week/team/presentation/team_home_page.dart';
-import 'package:dinners_of_week/team/presentation/team_page.dart';
-import 'package:dinners_of_week/food/domain/food_repository.dart';
+
+import 'package:dinners_of_week/team/presentation/detail/team_detail_page.dart';
+import 'package:dinners_of_week/team/presentation/team/team_page.dart';
+
 import 'package:dinners_of_week/auth/domain/user_repositroy.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -46,14 +43,13 @@ class MyApp extends StatelessWidget {
       ),
       home: RepositoryProvider(
         create: (context) => UserRepositroy(),
-        child: SplashPage(),
+        child: const SplashPage(),
       ),
       routes: {
-        // Burada "signup" adında bir route tanımlıyoruz
-        '/signup': (context) => SignUpPage(),
-        '/signIn': ((context) => SignInPage()),
-        '/teams': (context) => Team(),
-        '/team_home': (context) => TeamHomePage()
+        '/signup': (context) => const SignUpPage(),
+        '/signIn': ((context) => const SignInPage()),
+        '/teams': (context) => const Team(),
+        '/team_home': (context) => const TeamHomePage()
       },
     );
   }

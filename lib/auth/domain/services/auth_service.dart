@@ -1,4 +1,4 @@
-import 'package:dinners_of_week/team/presentation/team_page.dart';
+import 'package:dinners_of_week/team/presentation/team/team_page.dart';
 import 'package:dinners_of_week/team/domain/teams_repository.dart';
 import 'package:dinners_of_week/auth/domain/user_repositroy.dart';
 import 'package:flutter/material.dart';

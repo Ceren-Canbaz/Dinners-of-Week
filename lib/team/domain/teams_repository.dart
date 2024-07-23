@@ -64,6 +64,25 @@ class TeamsRepository {
       throw Exception(e);
     }
   }
+
+  Future<void> addFoodTeamCalendar({
+    required String teamId,
+    required String foodId,
+    required DateTime date,
+  }) async {
+    try {
+      await supabase.from("team_food").insert(
+        {
+          'teamId': teamId,
+          'foodId': foodId,
+          'date': date.toIso8601String(),
+        },
+      );
+    } catch (e) {
+      print(e);
+      throw Exception();
+    }
+  }
 }
 
 Future<String> createCode(String name) async {
