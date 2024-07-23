@@ -1,8 +1,8 @@
 import 'package:dinners_of_week/style/colors.dart';
-import 'package:dinners_of_week/team/domain/teams_repository.dart';
-import 'package:dinners_of_week/team/presentation/detail/cubit/team_detail_cubit.dart';
-import 'package:dinners_of_week/team/presentation/team/team_page.dart';
-import 'package:dinners_of_week/team/presentation/widgets/food_card.dart';
+import 'package:dinners_of_week/features/team/domain/teams_repository.dart';
+import 'package:dinners_of_week/features/team/presentation/detail/cubit/team_detail_cubit.dart';
+import 'package:dinners_of_week/features/team/presentation/team/team_page.dart';
+import 'package:dinners_of_week/features/team/presentation/widgets/food_card.dart';
 import 'package:dinners_of_week/utils/enums/request_state.dart';
 import 'package:dinners_of_week/utils/extensions/date_extension.dart';
 import 'package:flutter/material.dart';
@@ -41,6 +41,17 @@ class _TeamHomePageState extends State<TeamHomePage> {
                   },
                   icon: const Icon(
                     Icons.add,
+                    color: AppColors.darkGreen,
+                  )),
+              IconButton(
+                  onPressed: () async {
+                    final prefs = await SharedPreferences.getInstance();
+
+                    await prefs.remove('dowUsername');
+                    setState(() {});
+                  },
+                  icon: const Icon(
+                    Icons.exit_to_app,
                     color: AppColors.darkGreen,
                   ))
             ],

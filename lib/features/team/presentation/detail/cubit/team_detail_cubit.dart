@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:dinners_of_week/team/data/models/team_food_dto.dart';
-import 'package:dinners_of_week/team/domain/teams_repository.dart';
+import 'package:dinners_of_week/features/team/data/models/team_food_dto.dart';
+import 'package:dinners_of_week/features/team/domain/teams_repository.dart';
 import 'package:dinners_of_week/utils/enums/request_state.dart';
 import 'package:equatable/equatable.dart';
 

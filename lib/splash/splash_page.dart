@@ -1,5 +1,5 @@
 import 'package:dinners_of_week/style/colors.dart';
-import 'package:dinners_of_week/team/domain/teams_repository.dart';
+import 'package:dinners_of_week/features/team/domain/teams_repository.dart';
 import 'package:dinners_of_week/auth/domain/user_repositroy.dart';
 import 'package:dinners_of_week/auth/domain/services/auth_service.dart';
 import 'package:flutter/material.dart';

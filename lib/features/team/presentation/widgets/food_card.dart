@@ -1,5 +1,5 @@
 import 'package:dinners_of_week/style/colors.dart';
-import 'package:dinners_of_week/team/data/models/team_food_dto.dart';
+import 'package:dinners_of_week/features/team/data/models/team_food_dto.dart';
 import 'package:dinners_of_week/utils/extensions/date_extension.dart';
 import 'package:flutter/material.dart';
 

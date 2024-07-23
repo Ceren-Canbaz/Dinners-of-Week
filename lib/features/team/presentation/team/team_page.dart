@@ -1,8 +1,8 @@
 import 'package:dinners_of_week/style/colors.dart';
-import 'package:dinners_of_week/team/presentation/team/team_bloc/team_bloc.dart';
+import 'package:dinners_of_week/features/team/presentation/team/team_bloc/team_bloc.dart';
 import 'package:dinners_of_week/auth/data/models/auth.dart';
-import 'package:dinners_of_week/team/data/models/team.dart';
-import 'package:dinners_of_week/team/domain/teams_repository.dart';
+import 'package:dinners_of_week/features/team/data/models/team.dart';
+import 'package:dinners_of_week/features/team/domain/teams_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';

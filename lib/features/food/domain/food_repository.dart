@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:dinners_of_week/main.dart';
-import 'package:dinners_of_week/food/data/models/food.dart';
+import 'package:dinners_of_week/features/food/data/models/food.dart';
 
 class FoodRepository {
   Future<List<Food>> getFoods() async {

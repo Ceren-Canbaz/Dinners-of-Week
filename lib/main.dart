@@ -3,8 +3,8 @@ import 'package:dinners_of_week/auth/presentation/sign_up_page.dart';
 import 'package:dinners_of_week/splash/splash_page.dart';
 import 'package:dinners_of_week/style/colors.dart';
 
-import 'package:dinners_of_week/team/presentation/detail/team_detail_page.dart';
-import 'package:dinners_of_week/team/presentation/team/team_page.dart';
+import 'package:dinners_of_week/features/team/presentation/detail/team_detail_page.dart';
+import 'package:dinners_of_week/features/team/presentation/team/team_page.dart';
 
 import 'package:dinners_of_week/auth/domain/user_repositroy.dart';
 import 'package:flutter/material.dart';

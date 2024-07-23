@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:dinners_of_week/food/data/models/food.dart';
-import 'package:dinners_of_week/food/domain/food_repository.dart';
+import 'package:dinners_of_week/features/food/data/models/food.dart';
+import 'package:dinners_of_week/features/food/domain/food_repository.dart';
 import 'package:equatable/equatable.dart';
 
 part 'food_event.dart';

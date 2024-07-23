@@ -1,6 +1,6 @@
-import 'package:dinners_of_week/food/presentation/food_bloc/food_bloc.dart';
-import 'package:dinners_of_week/food/data/models/food.dart';
-import 'package:dinners_of_week/food/domain/food_repository.dart';
+import 'package:dinners_of_week/features/food/presentation/food_bloc/food_bloc.dart';
+import 'package:dinners_of_week/features/food/data/models/food.dart';
+import 'package:dinners_of_week/features/food/domain/food_repository.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
