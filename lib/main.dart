@@ -1,11 +1,12 @@
 import 'package:dinners_of_week/auth/presentation/sign_in_page.dart';
 import 'package:dinners_of_week/auth/presentation/sign_up_page.dart';
+import 'package:dinners_of_week/features/food/presentation/foods_page.dart';
 import 'package:dinners_of_week/splash/splash_page.dart';
 import 'package:dinners_of_week/style/colors.dart';
 
-import 'package:dinners_of_week/features/team/presentation/detail/team_detail_page.dart';
+import 'package:dinners_of_week/features/team/presentation/weekly_plan/weekly_plan.dart';
 import 'package:dinners_of_week/features/team/presentation/team/team_page.dart';
-
+import 'package:dinners_of_week/auth/data/models/team_user.dart';
 import 'package:dinners_of_week/auth/domain/user_repositroy.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -66,11 +67,14 @@ class MyApp extends StatelessWidget {
       routes: {
         '/signup': (context) => const SignUpPage(),
         '/signIn': ((context) => const SignInPage()),
-        '/teams': (context) => const Team(),
-        '/team_home': (context) => TeamHomePage(
+        '/teams': (context) => TeamPage(
+              user: ModalRoute.of(context)!.settings.arguments as TeamUser,
+            ),
+        '/team_home': (context) => WeeklyPlanPage(
               params: ModalRoute.of(context)!.settings.arguments
                   as TeamHomePageParameters,
-            )
+            ),
+        '/foods': (context) => const FoodsPage()
       },
     );
   }

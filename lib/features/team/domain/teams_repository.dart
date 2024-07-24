@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:dinners_of_week/main.dart';
-import 'package:dinners_of_week/auth/data/models/auth.dart';
+import 'package:dinners_of_week/auth/data/models/team_user.dart';
 import 'package:dinners_of_week/features/team/data/models/team.dart';
 import 'package:dinners_of_week/features/team/data/models/team_food_dto.dart';
 
@@ -22,7 +22,8 @@ class TeamsRepository {
     }
   }
 
-  Future<void> setCodeToUser({required Auth user, required String code}) async {
+  Future<void> setCodeToUser(
+      {required TeamUser user, required String code}) async {
     try {
       await supabase.from("users").update({
         "teamsCode": code,
@@ -46,7 +47,7 @@ class TeamsRepository {
   }
 
   Future<TeamModel> joinTeam(
-      {required String teamCode, required Auth user}) async {
+      {required String teamCode, required TeamUser user}) async {
     try {
       final List<dynamic> response =
           await supabase.from('teams').select().eq('code', teamCode).select();

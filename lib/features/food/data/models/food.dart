@@ -8,24 +8,29 @@ class Food {
   final String name;
   final String description;
   final bool hasDrink;
+  final String imageUrl;
 
-  Food(
-      {required this.name,
-      required this.hasDrink,
-      required this.description,
-      required this.id});
+  Food({
+    required this.name,
+    required this.hasDrink,
+    required this.description,
+    required this.id,
+    required this.imageUrl,
+  });
 
   Food copyWith({
     String? id,
     String? name,
     String? description,
     bool? hasDrink,
+    String? imageUrl,
   }) {
     return Food(
       id: id ?? this.id,
       name: name ?? this.name,
       description: description ?? this.description,
       hasDrink: hasDrink ?? this.hasDrink,
+      imageUrl: imageUrl ?? this.imageUrl,
     );
   }
 
@@ -34,6 +39,7 @@ class Food {
       'name': name,
       'description': description,
       'hasDrink': hasDrink,
+      'imageUrl': imageUrl,
     };
   }
 
@@ -43,10 +49,11 @@ class Food {
       name: map['name'] as String,
       description: map['description'] as String,
       hasDrink: map['hasDrink'] as bool,
+      imageUrl: map['imageUrl'] as String,
     );
   }
   @override
   String toString() {
-    return 'Food{id: $id, name: $name, description: $description, hasDrink: $hasDrink}';
+    return 'Food{id: $id, name: $name, description: $description, hasDrink: $hasDrink image: $imageUrl}';
   }
 }

@@ -1,22 +1,24 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
+
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
-class Auth extends Equatable {
+class TeamUser extends Equatable {
   final String id;
   final String password;
   final String username;
   final bool? isAdmin;
   final String? salt;
+  //change this prop with teamId
   final String? teamCode;
 
-  Auth(
-      {required this.password,
-      required this.username,
-      required this.id,
-      this.isAdmin,
-      this.salt,
-      this.teamCode});
+  const TeamUser({
+    required this.password,
+    required this.username,
+    required this.id,
+    this.isAdmin,
+    this.salt,
+    this.teamCode,
+  });
 
   @override
   List<Object?> get props => [password, username, salt, teamCode];
@@ -31,8 +33,8 @@ class Auth extends Equatable {
     };
   }
 
-  factory Auth.fromMap(Map<String, dynamic> map) {
-    return Auth(
+  factory TeamUser.fromMap(Map<String, dynamic> map) {
+    return TeamUser(
         id: map['id'] as String,
         password: map['password'] as String,
         username: map['username'] as String,
@@ -41,14 +43,14 @@ class Auth extends Equatable {
         teamCode: map['teamsCode'] ?? "");
   }
 
-  Auth copyWith(
+  TeamUser copyWith(
       {String? email,
       String? password,
       String? username,
       bool? isAdmin,
       String? salt,
       String? teamCode}) {
-    return Auth(
+    return TeamUser(
         id: id,
         password: password ?? this.password,
         username: username ?? this.username,

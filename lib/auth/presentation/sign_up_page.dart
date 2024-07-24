@@ -1,5 +1,5 @@
 import 'package:dinners_of_week/auth/presentation/auth_bloc/bloc/auth_bloc.dart';
-import 'package:dinners_of_week/auth/data/models/auth.dart';
+import 'package:dinners_of_week/auth/data/models/team_user.dart';
 
 import 'package:dinners_of_week/style/colors.dart';
 import 'package:dinners_of_week/style/input_decoration.dart';
@@ -119,7 +119,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                                         context)
                                                     .add(
                                                   SignUpEvent(
-                                                    auth: Auth(
+                                                    user: TeamUser(
                                                         id: "",
                                                         password:
                                                             passwordController
@@ -153,7 +153,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       if (state is SignInState) {
                         //navigate to teams page with user (auth)
                         Navigator.of(context).pushReplacementNamed("/teams",
-                            arguments: state.auth);
+                            arguments: state.user);
                       }
                     }),
                   ),

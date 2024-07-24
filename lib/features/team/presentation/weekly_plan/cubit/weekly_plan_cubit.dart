@@ -4,20 +4,22 @@ import 'package:dinners_of_week/features/team/domain/teams_repository.dart';
 import 'package:dinners_of_week/utils/enums/request_state.dart';
 import 'package:equatable/equatable.dart';
 
-part 'team_detail_state.dart';
+part 'weekly_plan_state.dart';
 
-class TeamDetailCubit extends Cubit<TeamDetailState> {
+class WeeklyPlanCubit extends Cubit<WeeklyPlanState> {
   final TeamsRepository _repo;
   final String _id;
-  TeamDetailCubit({required TeamsRepository repo, required String id})
+  WeeklyPlanCubit({required TeamsRepository repo, required String id})
       : _repo = repo,
         _id = id,
         super(
-          const TeamDetailState(
-            foods: [],
-            requestState: RequestState.initial,
-          ),
+          WeeklyPlanState(
+              foods: [],
+              requestState: RequestState.initial,
+              selectedDate: DateTime.now(),
+              weekDays: []),
         ) {
+    _setWeekDays();
     getWeeklyFoodList(teamId: _id);
   }
   Future<void> addFootToCalendar() async {
@@ -49,5 +51,26 @@ class TeamDetailCubit extends Cubit<TeamDetailState> {
         ),
       );
     }
+  }
+
+  void _setWeekDays() {
+    final now = DateTime.now();
+    final currentWeekday = now.weekday;
+    final firstDayOfWeek = now.subtract(Duration(days: currentWeekday - 1));
+    final weekdays =
+        List.generate(5, (index) => firstDayOfWeek.add(Duration(days: index)));
+    emit(
+      state.copyWith(
+        weekDays: weekdays,
+      ),
+    );
+  }
+
+  void setCurrentDay({required DateTime date}) {
+    emit(
+      state.copyWith(
+        selectedDate: date,
+      ),
+    );
   }
 }

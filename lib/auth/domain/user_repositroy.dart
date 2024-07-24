@@ -4,7 +4,7 @@ import 'dart:math';
 
 import 'package:crypto/crypto.dart';
 import 'package:dinners_of_week/main.dart';
-import 'package:dinners_of_week/auth/data/models/auth.dart';
+import 'package:dinners_of_week/auth/data/models/team_user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -18,31 +18,31 @@ class AuthStateException implements Exception {
 class UserRepositroy {
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
-  Future<Auth> signUp(Auth auth) async {
+  Future<TeamUser> signUp(TeamUser user) async {
     try {
       final salt = generateSalt();
-      final hashedPassword = hashPassword(auth.password, salt);
+      final hashedPassword = hashPassword(user.password, salt);
 
-      auth = auth.copyWith(password: hashedPassword, salt: salt);
+      user = user.copyWith(password: hashedPassword, salt: salt);
 
-      await supabase.from("users").insert(auth.toMap());
+      await supabase.from("users").insert(user.toMap());
 
       final prefs = await SharedPreferences.getInstance();
-      prefs.setString('dowUsername', auth.username);
-      return await getUser(auth.username);
+      prefs.setString('dowUsername', user.username);
+      return await getUser(user.username);
     } catch (e) {
       throw const PostgrestException(message: 'User already exist');
     }
   }
 
-  Future<Auth> getUser(String username) async {
+  Future<TeamUser> getUser(String username) async {
     try {
       final response = await supabase
           .from('users') // Tablo adını buraya ekleyin
           .select()
           .eq('username', username); // 'email' sütunu ile eşleşen verileri al
       final data = response as List<dynamic>;
-      final user = Auth.fromMap(data.first);
+      final user = TeamUser.fromMap(data.first);
 
       return user;
     } catch (e) {
@@ -50,15 +50,15 @@ class UserRepositroy {
     }
   }
 
-  Future<bool> signIn(Auth auth) async {
+  Future<bool> signIn(TeamUser user) async {
     try {
-      final user = await getUser(auth.username);
-      if (user != null) {
-        final pass = hashPassword(auth.password, user.salt!);
+      final fetchedUser = await getUser(user.username);
+      if (fetchedUser != null) {
+        final pass = hashPassword(fetchedUser.password, fetchedUser.salt!);
 
-        if (user.password == pass) {
+        if (fetchedUser.password == pass) {
           final prefs = await SharedPreferences.getInstance();
-          prefs.setString('dowUsername', auth.username);
+          prefs.setString('dowUsername', fetchedUser.username);
           return true;
         } else {
           throw AuthStateException(

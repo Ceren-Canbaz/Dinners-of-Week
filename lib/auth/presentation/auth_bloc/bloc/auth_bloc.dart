@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:dinners_of_week/auth/data/models/auth.dart';
+import 'package:dinners_of_week/auth/data/models/team_user.dart';
 import 'package:dinners_of_week/auth/domain/user_repositroy.dart';
 import 'package:equatable/equatable.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -14,10 +14,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<SignInEvent>(
       (event, emit) async {
         try {
-          final status = await userRepository.signIn(event.auth);
+          final status = await userRepository.signIn(event.user);
           if (status) {
             emit(
-              SignInState(auth: event.auth),
+              SignInState(user: event.user),
             );
           }
         } on AuthStateException catch (e) {
@@ -33,8 +33,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     );
     on<SignUpEvent>((event, emit) async {
       try {
-        final user = await userRepository.signUp(event.auth);
-        emit(SignInState(auth: user));
+        final user = await userRepository.signUp(event.user);
+        emit(SignInState(user: user));
       } on PostgrestException catch (e) {
         emit(AuthErrorState(error: e.message));
       } on Exception catch (e) {

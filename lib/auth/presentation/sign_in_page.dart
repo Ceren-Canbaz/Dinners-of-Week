@@ -1,5 +1,5 @@
 import 'package:dinners_of_week/auth/presentation/auth_bloc/bloc/auth_bloc.dart';
-import 'package:dinners_of_week/auth/data/models/auth.dart';
+import 'package:dinners_of_week/auth/data/models/team_user.dart';
 import 'package:dinners_of_week/style/colors.dart';
 import 'package:dinners_of_week/style/input_decoration.dart';
 import 'package:dinners_of_week/auth/domain/user_repositroy.dart';
@@ -70,7 +70,7 @@ class _SignInPageState extends State<SignInPage> {
                       listener: (context, state) {
                         if (state is SignInState) {
                           Navigator.of(context).pushReplacementNamed("/teams",
-                              arguments: state.auth);
+                              arguments: state.user);
                         }
                       },
                       builder: (context, state) {
@@ -83,7 +83,7 @@ class _SignInPageState extends State<SignInPage> {
                                 onPressed: () {
                                   BlocProvider.of<AuthBloc>(context).add(
                                     SignInEvent(
-                                      auth: Auth(
+                                      user: TeamUser(
                                           id: "",
                                           password: passwordController.text,
                                           username: emailController.text,

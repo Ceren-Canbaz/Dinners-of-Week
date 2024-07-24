@@ -12,19 +12,19 @@ class SignInInitialEvent extends AuthEvent {}
 class SignUpInitialEvent extends AuthEvent {}
 
 class SignInEvent extends AuthEvent {
-  final Auth auth;
+  final TeamUser user;
 
-  const SignInEvent({required this.auth});
+  const SignInEvent({required this.user});
   @override
-  List<Object> get props => [auth];
+  List<Object> get props => [user];
 }
 
 class SignUpEvent extends AuthEvent {
-  final Auth auth;
+  final TeamUser user;
 
-  const SignUpEvent({required this.auth});
+  const SignUpEvent({required this.user});
   @override
-  List<Object> get props => [auth];
+  List<Object> get props => [user];
 }
 
 class SignUpErrorEvent extends AuthEvent {
@@ -36,9 +36,9 @@ class SignUpErrorEvent extends AuthEvent {
 }
 
 class SignUpSuccessEvent extends AuthEvent {
-  final Auth auth;
+  final TeamUser user;
 
-  const SignUpSuccessEvent({required this.auth});
+  const SignUpSuccessEvent({required this.user});
   @override
-  List<Object> get props => [auth];
+  List<Object> get props => [user];
 }

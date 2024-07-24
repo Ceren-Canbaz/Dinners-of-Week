@@ -1,23 +1,25 @@
 import 'package:dinners_of_week/style/colors.dart';
 import 'package:dinners_of_week/features/team/presentation/team/team_bloc/team_bloc.dart';
-import 'package:dinners_of_week/auth/data/models/auth.dart';
+import 'package:dinners_of_week/auth/data/models/team_user.dart';
 import 'package:dinners_of_week/features/team/data/models/team.dart';
 import 'package:dinners_of_week/features/team/domain/teams_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class Team extends StatefulWidget {
-  const Team({super.key});
+class TeamPage extends StatefulWidget {
+  const TeamPage({super.key, required this.user});
 
+  ///TODO: move to initial and make singleton.
+  final TeamUser user;
   @override
-  State<Team> createState() => _TeamState();
+  State<TeamPage> createState() => _TeamPageState();
 }
 
-class _TeamState extends State<Team> {
+class _TeamPageState extends State<TeamPage> {
   @override
   Widget build(BuildContext context) {
-    final auth = ModalRoute.of(context)!.settings.arguments as Auth;
+    final auth = ModalRoute.of(context)!.settings.arguments as TeamUser;
 
     return BlocProvider(
       create: (context) {
@@ -251,7 +253,7 @@ class _TeamState extends State<Team> {
 }
 
 class TeamHomePageParameters {
-  final Auth user;
+  final TeamUser user;
   final TeamModel team;
 
   TeamHomePageParameters({required this.user, required this.team});

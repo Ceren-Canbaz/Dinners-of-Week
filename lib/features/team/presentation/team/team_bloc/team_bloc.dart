@@ -1,7 +1,7 @@
 import 'dart:ffi';
 
 import 'package:bloc/bloc.dart';
-import 'package:dinners_of_week/auth/data/models/auth.dart';
+import 'package:dinners_of_week/auth/data/models/team_user.dart';
 import 'package:dinners_of_week/features/team/data/models/team.dart';
 import 'package:dinners_of_week/features/team/domain/teams_repository.dart';
 import 'package:equatable/equatable.dart';

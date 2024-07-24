@@ -11,7 +11,7 @@ class TeamInitialEvent extends TeamEvent {}
 
 class TeamCreateEvent extends TeamEvent {
   final String teamName;
-  final Auth user;
+  final TeamUser user;
 
   const TeamCreateEvent({required this.teamName, required this.user});
   @override
@@ -20,7 +20,7 @@ class TeamCreateEvent extends TeamEvent {
 
 class TeamJoinEvent extends TeamEvent {
   final String teamCode;
-  final Auth user;
+  final TeamUser user;
 
   TeamJoinEvent({required this.teamCode, required this.user});
   @override

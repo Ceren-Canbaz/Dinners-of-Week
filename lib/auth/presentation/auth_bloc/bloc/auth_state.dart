@@ -13,11 +13,11 @@ class AuthInitial extends AuthState {
 }
 
 class SignInState extends AuthState {
-  final Auth auth;
+  final TeamUser user;
 
-  const SignInState({required this.auth});
+  const SignInState({required this.user});
   @override
-  List<Object> get props => [auth];
+  List<Object> get props => [user];
 }
 
 class AuthErrorState extends AuthState {
