@@ -135,7 +135,7 @@ class _WeeklyPlanPageState extends State<WeeklyPlanPage> {
                     case RequestState.loaded:
                       if (state.foods.isNotEmpty) {
                         return const Center(
-                          child: Text("yuklendi agam"),
+                          child: Text("loaded"),
                         );
                       } else {
                         return Expanded(
