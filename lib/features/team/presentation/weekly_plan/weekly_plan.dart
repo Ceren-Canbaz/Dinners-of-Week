@@ -2,9 +2,7 @@ import 'package:dinners_of_week/style/colors.dart';
 import 'package:dinners_of_week/features/team/domain/teams_repository.dart';
 import 'package:dinners_of_week/features/team/presentation/weekly_plan/cubit/weekly_plan_cubit.dart';
 import 'package:dinners_of_week/features/team/presentation/team/team_page.dart';
-import 'package:dinners_of_week/features/team/presentation/widgets/food_card.dart';
 import 'package:dinners_of_week/utils/enums/request_state.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
