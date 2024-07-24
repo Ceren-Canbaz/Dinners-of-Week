@@ -121,7 +121,11 @@ class WeeklyPlanCubit extends Cubit<WeeklyPlanState> {
         ),
       );
     } catch (e) {
-      emit(state.copyWith());
+      emit(
+        state.copyWith(
+          requestState: RequestState.error,
+        ),
+      );
 
       ///add modal state and show error modal;
     }

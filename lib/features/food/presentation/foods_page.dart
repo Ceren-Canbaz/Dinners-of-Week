@@ -1,6 +1,7 @@
 import 'package:dinners_of_week/features/food/domain/food_repository.dart';
 import 'package:dinners_of_week/features/food/presentation/cubit/foods_cubit.dart';
 import 'package:dinners_of_week/features/food/presentation/widgets/food_card.dart';
+import 'package:dinners_of_week/style/colors.dart';
 
 import 'package:dinners_of_week/utils/enums/request_state.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,14 @@ class FoodsPage extends StatelessWidget {
       )..getFoods(),
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Foods"),
+          title: const Text(
+            "Foods",
+            style: TextStyle(
+              fontSize: 24,
+              color: AppColors.ligtBlueColor,
+              fontWeight: FontWeight.w300,
+            ),
+          ),
         ),
         body: BlocBuilder<FoodsCubit, FoodsState>(builder: (context, state) {
           switch (state.requestState) {

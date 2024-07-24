@@ -72,10 +72,6 @@ class _WeeklyPlanPageState extends State<WeeklyPlanPage> {
           ),
           body: Column(
             children: [
-              //fix this with  custom appbar and add preffered size
-              const SizedBox(
-                height: 18,
-              ),
               const DaysListWidget(),
               FoodOfDayWidget(
                 isAdmin: widget.params.user.isAdmin ?? false,

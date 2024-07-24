@@ -7,6 +7,7 @@ import 'package:dinners_of_week/style/text_decortaion.dart';
 import 'package:dinners_of_week/utils/enums/request_state.dart';
 import 'package:dinners_of_week/utils/extensions/date_extension.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FoodOfDayWidget extends StatelessWidget {
@@ -156,8 +157,24 @@ class FoodOfDayWidget extends StatelessWidget {
             }
 
           case RequestState.error:
-            return const Center(
-              child: Text("Something Went Wrong "),
+            return const Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Something Went Wrong ",
+                    style: TextStyle(
+                      fontSize: 18,
+                    ),
+                  ),
+                  Text(
+                    "Please Contact with Support",
+                    style: TextStyle(
+                      fontSize: 14,
+                    ),
+                  ),
+                ],
+              ),
             );
         }
       },
