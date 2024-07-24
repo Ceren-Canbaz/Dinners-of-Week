@@ -4,7 +4,7 @@ import 'package:dinners_of_week/features/food/presentation/foods_page.dart';
 import 'package:dinners_of_week/splash/splash_page.dart';
 import 'package:dinners_of_week/style/colors.dart';
 
-import 'package:dinners_of_week/features/team/presentation/weekly_plan/weekly_plan.dart';
+import 'package:dinners_of_week/features/team/presentation/weekly_plan/weekly_plan_page.dart';
 import 'package:dinners_of_week/features/team/presentation/team/team_page.dart';
 import 'package:dinners_of_week/auth/data/models/team_user.dart';
 import 'package:dinners_of_week/auth/domain/user_repositroy.dart';

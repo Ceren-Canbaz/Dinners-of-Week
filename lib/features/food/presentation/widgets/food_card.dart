@@ -1,4 +1,6 @@
 import 'package:dinners_of_week/features/food/presentation/widgets/food_image_container.dart';
+import 'package:dinners_of_week/style/colors.dart';
+
 import 'package:flutter/material.dart';
 
 class FoodCard extends StatelessWidget {
@@ -28,6 +30,7 @@ class FoodCard extends StatelessWidget {
               name, // Replace with e.name
               style: const TextStyle(
                 fontSize: 16.0,
+                color: AppColors.ligtBlueColor,
                 fontWeight: FontWeight.bold,
               ),
               textAlign: TextAlign.center,
@@ -35,7 +38,8 @@ class FoodCard extends StatelessWidget {
             Text(
               description,
               style: const TextStyle(
-                fontSize: 14,
+                fontSize: 12,
+                color: AppColors.brown,
                 fontWeight: FontWeight.w400,
               ),
               textAlign: TextAlign.start,

@@ -1,6 +1,7 @@
 import 'package:dinners_of_week/features/food/domain/food_repository.dart';
 import 'package:dinners_of_week/features/food/presentation/cubit/foods_cubit.dart';
 import 'package:dinners_of_week/features/food/presentation/widgets/food_card.dart';
+import 'package:dinners_of_week/style/buttons.dart';
 import 'package:dinners_of_week/style/colors.dart';
 
 import 'package:dinners_of_week/utils/enums/request_state.dart';
@@ -18,6 +19,8 @@ class FoodsPage extends StatelessWidget {
       )..getFoods(),
       child: Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
+          centerTitle: false,
           title: const Text(
             "Foods",
             style: TextStyle(
@@ -54,11 +57,14 @@ class FoodsPage extends StatelessWidget {
                             e,
                           );
                         },
-                        child: FoodCard(
-                            name: e.name,
-                            description: e.description,
-                            hasDrink: e.hasDrink,
-                            imageUrl: e.imageUrl)),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: FoodCard(
+                              name: e.name,
+                              description: e.description,
+                              hasDrink: e.hasDrink,
+                              imageUrl: e.imageUrl),
+                        )),
                   )
 
                   ///TODO: Add "Add Food"  option.

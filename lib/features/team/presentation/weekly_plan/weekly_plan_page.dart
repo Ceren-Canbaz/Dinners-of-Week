@@ -1,12 +1,11 @@
 import 'package:dinners_of_week/features/food/data/models/food.dart';
-import 'package:dinners_of_week/features/food/presentation/widgets/food_image_container.dart';
 import 'package:dinners_of_week/features/team/presentation/widgets/days_list_widget.dart';
 import 'package:dinners_of_week/features/team/presentation/widgets/food_of_day_widget.dart';
 import 'package:dinners_of_week/style/colors.dart';
 import 'package:dinners_of_week/features/team/domain/teams_repository.dart';
 import 'package:dinners_of_week/features/team/presentation/weekly_plan/cubit/weekly_plan_cubit.dart';
 import 'package:dinners_of_week/features/team/presentation/team/team_page.dart';
-import 'package:dinners_of_week/utils/enums/request_state.dart';
+
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
