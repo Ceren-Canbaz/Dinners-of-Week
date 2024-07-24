@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:collection/collection.dart';
 import 'package:dinners_of_week/features/food/data/models/food.dart';
-import 'package:dinners_of_week/features/team/data/models/team_food_dto.dart';
+import 'package:dinners_of_week/features/team/data/models/team_food_detail.dart';
 import 'package:dinners_of_week/features/team/domain/teams_repository.dart';
 import 'package:dinners_of_week/utils/enums/request_state.dart';
 import 'package:dinners_of_week/utils/extensions/date_extension.dart';
@@ -118,9 +118,14 @@ class WeeklyPlanCubit extends Cubit<WeeklyPlanState> {
 
       if (food != null) {
         selectedDaysFood = food;
+      } else {
+        selectedDaysFood = TeamFoodDetails.empty();
       }
     }
-    emit(
-        state.copyWith(selectedDate: date, selectedDaysFood: selectedDaysFood));
+    emit(state.copyWith(
+      selectedDate: date,
+      selectedDaysFood: selectedDaysFood,
+      requestState: RequestState.loaded,
+    ));
   }
 }

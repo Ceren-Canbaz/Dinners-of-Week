@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:dinners_of_week/main.dart';
 import 'package:dinners_of_week/auth/data/models/team_user.dart';
 import 'package:dinners_of_week/features/team/data/models/team.dart';
-import 'package:dinners_of_week/features/team/data/models/team_food_dto.dart';
+import 'package:dinners_of_week/features/team/data/models/team_food_detail.dart';
 
 ///TODO: Move this methods to data layer and add dartz to repository
 class TeamsRepository {

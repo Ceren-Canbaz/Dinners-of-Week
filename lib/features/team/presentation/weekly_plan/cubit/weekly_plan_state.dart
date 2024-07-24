@@ -24,7 +24,8 @@ class WeeklyPlanState extends Equatable {
       RequestState? requestState,
       DateTime? selectedDate,
       List<DateTime>? weekDays,
-      TeamFoodDetails? selectedDaysFood}) {
+      TeamFoodDetails? selectedDaysFood,
+      bool allowNull = false}) {
     return WeeklyPlanState(
       foods: foods ?? this.foods,
       requestState: requestState ?? this.requestState,
