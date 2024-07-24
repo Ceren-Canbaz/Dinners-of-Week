@@ -1,8 +1,10 @@
 import 'package:bloc/bloc.dart';
+import 'package:collection/collection.dart';
 import 'package:dinners_of_week/features/food/data/models/food.dart';
 import 'package:dinners_of_week/features/team/data/models/team_food_dto.dart';
 import 'package:dinners_of_week/features/team/domain/teams_repository.dart';
 import 'package:dinners_of_week/utils/enums/request_state.dart';
+import 'package:dinners_of_week/utils/extensions/date_extension.dart';
 import 'package:equatable/equatable.dart';
 
 part 'weekly_plan_state.dart';
@@ -15,10 +17,12 @@ class WeeklyPlanCubit extends Cubit<WeeklyPlanState> {
         _teamId = id,
         super(
           WeeklyPlanState(
-              foods: [],
-              requestState: RequestState.initial,
-              selectedDate: DateTime.now(),
-              weekDays: []),
+            foods: [],
+            requestState: RequestState.initial,
+            selectedDate: DateTime.now(),
+            weekDays: const [],
+            selectedDaysFood: null,
+          ),
         ) {
     _setWeekDays();
     getWeeklyFoodList(teamId: _teamId);
@@ -74,10 +78,17 @@ class WeeklyPlanCubit extends Cubit<WeeklyPlanState> {
   }
 
   void setCurrentDay({required DateTime date}) {
+    TeamFoodDetails? selectedDaysFood;
+    if (state.foods.isNotEmpty) {
+      final food = state.foods.firstWhereOrNull(
+        (element) => element.date.formattedDate() == date.formattedDate(),
+      );
+
+      if (food != null) {
+        selectedDaysFood = food;
+      }
+    }
     emit(
-      state.copyWith(
-        selectedDate: date,
-      ),
-    );
+        state.copyWith(selectedDate: date, selectedDaysFood: selectedDaysFood));
   }
 }

@@ -138,8 +138,13 @@ class _WeeklyPlanPageState extends State<WeeklyPlanPage> {
                       );
 
                     case RequestState.loaded:
-                      if (state.foods.isNotEmpty) {
-                        return Container();
+                      if (state.selectedDaysFood != null) {
+                        return FoodCard(
+                            name: state.selectedDaysFood!.foodName,
+                            description:
+                                state.selectedDaysFood!.foodDescription,
+                            hasDrink: state.selectedDaysFood!.hasDrink,
+                            imageUrl: state.selectedDaysFood!.imageUrl);
                       } else {
                         return Expanded(
                           child: Column(
