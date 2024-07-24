@@ -1,4 +1,4 @@
-import 'package:dinners_of_week/features/food/data/models/food.dart';
+import 'package:dinners_of_week/features/food/presentation/widgets/food_image_container.dart';
 import 'package:flutter/material.dart';
 
 class FoodCard extends StatelessWidget {
@@ -22,17 +22,7 @@ class FoodCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              height: 170,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8.0),
-                image: DecorationImage(
-                  image: NetworkImage(imageUrl),
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
+            ImageContainer(imageUrl: imageUrl),
             const SizedBox(height: 8.0),
             Text(
               name, // Replace with e.name
