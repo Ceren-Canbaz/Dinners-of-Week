@@ -99,7 +99,13 @@ class FoodOfDayWidget extends StatelessWidget {
                             const SizedBox(
                               width: 12,
                             ),
-                            DeleteButton(onDelete: () {}, title: "Delete")
+                            DeleteButton(
+                                onDelete: () async {
+                                  await context
+                                      .read<WeeklyPlanCubit>()
+                                      .delete();
+                                },
+                                title: "Delete")
                           ],
                         ),
                       )

@@ -109,6 +109,24 @@ class WeeklyPlanCubit extends Cubit<WeeklyPlanState> {
     );
   }
 
+  Future<void> delete() async {
+    try {
+      await _repo.deleteFoodFromCalendar(id: state.selectedDaysFood.id);
+      emit(
+        state.copyWith(
+          foods: state.foods
+              .where((element) => element.id != state.selectedDaysFood.id)
+              .toList(),
+          selectedDaysFood: TeamFoodDetails.empty(),
+        ),
+      );
+    } catch (e) {
+      emit(state.copyWith());
+
+      ///add modal state and show error modal;
+    }
+  }
+
   void setCurrentDay({required DateTime date}) {
     TeamFoodDetails? selectedDaysFood;
     if (state.foods.isNotEmpty) {

@@ -118,6 +118,14 @@ class TeamsRepository {
       rethrow;
     }
   }
+
+  Future<void> deleteFoodFromCalendar({required String id}) async {
+    try {
+      await supabase.from('weekly_food').delete().eq('id', id);
+    } catch (e) {
+      rethrow;
+    }
+  }
 }
 
 Future<String> createCode(String name) async {
