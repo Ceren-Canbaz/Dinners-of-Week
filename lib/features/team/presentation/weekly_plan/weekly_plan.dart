@@ -1,3 +1,5 @@
+import 'package:dinners_of_week/features/food/data/models/food.dart';
+import 'package:dinners_of_week/features/food/presentation/widgets/food_card.dart';
 import 'package:dinners_of_week/style/colors.dart';
 import 'package:dinners_of_week/features/team/domain/teams_repository.dart';
 import 'package:dinners_of_week/features/team/presentation/weekly_plan/cubit/weekly_plan_cubit.dart';
@@ -40,10 +42,13 @@ class _WeeklyPlanPageState extends State<WeeklyPlanPage> {
             actions: [
               IconButton(
                   onPressed: () async {
-                    final prefs = await SharedPreferences.getInstance();
-
-                    await prefs.remove('dowUsername');
-                    setState(() {});
+                    final result = await Navigator.of(context)
+                        .pushNamed('/foods') as Food?;
+                    if (result != null) {
+                      context.read<WeeklyPlanCubit>().addFood(
+                            food: result,
+                          );
+                    }
                   },
                   icon: const Icon(
                     Icons.add,
@@ -134,9 +139,7 @@ class _WeeklyPlanPageState extends State<WeeklyPlanPage> {
 
                     case RequestState.loaded:
                       if (state.foods.isNotEmpty) {
-                        return const Center(
-                          child: Text("loaded"),
-                        );
+                        return Container();
                       } else {
                         return Expanded(
                           child: Column(
@@ -145,8 +148,14 @@ class _WeeklyPlanPageState extends State<WeeklyPlanPage> {
                               const Text("Todays plan not ready yet"),
                               if (widget.params.user.isAdmin ?? false)
                                 ElevatedButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pushNamed('/foods');
+                                  onPressed: () async {
+                                    final result = await Navigator.of(context)
+                                        .pushNamed('/foods') as Food?;
+                                    if (result != null) {
+                                      context.read<WeeklyPlanCubit>().addFood(
+                                            food: result,
+                                          );
+                                    }
                                   },
                                   child: const Text("Add"),
                                 )

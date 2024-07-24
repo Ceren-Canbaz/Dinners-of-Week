@@ -73,7 +73,7 @@ class TeamsRepository {
     required DateTime date,
   }) async {
     try {
-      await supabase.from("team_food").insert(
+      await supabase.from("weekly_food").insert(
         {
           'teamId': teamId,
           'foodId': foodId,

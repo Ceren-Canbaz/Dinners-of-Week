@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:dinners_of_week/features/food/data/models/food.dart';
 import 'package:dinners_of_week/features/team/data/models/team_food_dto.dart';
 import 'package:dinners_of_week/features/team/domain/teams_repository.dart';
 import 'package:dinners_of_week/utils/enums/request_state.dart';
@@ -8,10 +9,10 @@ part 'weekly_plan_state.dart';
 
 class WeeklyPlanCubit extends Cubit<WeeklyPlanState> {
   final TeamsRepository _repo;
-  final String _id;
+  final String _teamId;
   WeeklyPlanCubit({required TeamsRepository repo, required String id})
       : _repo = repo,
-        _id = id,
+        _teamId = id,
         super(
           WeeklyPlanState(
               foods: [],
@@ -20,14 +21,7 @@ class WeeklyPlanCubit extends Cubit<WeeklyPlanState> {
               weekDays: []),
         ) {
     _setWeekDays();
-    getWeeklyFoodList(teamId: _id);
-  }
-  Future<void> addFootToCalendar() async {
-    await _repo.addFoodTeamCalendar(
-      teamId: "0417f581-7e87-4a52-8546-bc9808082a6c",
-      foodId: "50c6c1b8-b788-47c9-8633-e5aa39e37366",
-      date: DateTime.now(),
-    );
+    getWeeklyFoodList(teamId: _teamId);
   }
 
   Future<void> getWeeklyFoodList({required String teamId}) async {
@@ -51,6 +45,19 @@ class WeeklyPlanCubit extends Cubit<WeeklyPlanState> {
         ),
       );
     }
+  }
+
+  Future<void> addFood({
+    required Food food,
+  }) async {
+    try {
+      await _repo.addFoodTeamCalendar(
+        teamId: _teamId,
+        foodId: food.id,
+        date: state.selectedDate,
+      );
+      await getWeeklyFoodList(teamId: _teamId);
+    } catch (e) {}
   }
 
   void _setWeekDays() {
