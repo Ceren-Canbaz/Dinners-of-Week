@@ -29,6 +29,7 @@ class WeeklyPlanCubit extends Cubit<WeeklyPlanState> {
   }
 
   Future<void> getWeeklyFoodList({required String teamId}) async {
+    TeamFoodDetails? selectedDaysFood;
     try {
       emit(
         state.copyWith(
@@ -36,11 +37,22 @@ class WeeklyPlanCubit extends Cubit<WeeklyPlanState> {
         ),
       );
       final foods = await _repo.getWeeklyFoodList(teamId: teamId);
+      if (foods.isNotEmpty) {
+        final food = foods.firstWhereOrNull(
+          (element) =>
+              element.date.formattedDate() ==
+              state.selectedDate.formattedDate(),
+        );
+
+        if (food != null) {
+          selectedDaysFood = food;
+        }
+      }
       emit(
         state.copyWith(
-          requestState: RequestState.loaded,
-          foods: foods,
-        ),
+            requestState: RequestState.loaded,
+            foods: foods,
+            selectedDaysFood: selectedDaysFood),
       );
     } catch (e) {
       emit(

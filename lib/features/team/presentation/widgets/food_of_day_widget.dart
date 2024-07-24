@@ -3,6 +3,7 @@ import 'package:dinners_of_week/features/food/presentation/widgets/food_image_co
 import 'package:dinners_of_week/features/team/presentation/weekly_plan/cubit/weekly_plan_cubit.dart';
 import 'package:dinners_of_week/style/buttons.dart';
 import 'package:dinners_of_week/style/colors.dart';
+import 'package:dinners_of_week/style/text_decortaion.dart';
 import 'package:dinners_of_week/utils/enums/request_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -48,18 +49,7 @@ class FoodOfDayWidget extends StatelessWidget {
                       child: Text(
                         "Today's Special",
                         textAlign: TextAlign.start,
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700,
-                          color: AppColors.darkGrayColor,
-                          shadows: [
-                            Shadow(
-                              offset: const Offset(2.0, 2.0),
-                              blurRadius: 8,
-                              color: Colors.black.withOpacity(0.3),
-                            ),
-                          ],
-                        ),
+                        style: titleTextStyle(),
                       ),
                     ),
                     ImageContainer(imageUrl: state.selectedDaysFood!.imageUrl),
@@ -68,17 +58,9 @@ class FoodOfDayWidget extends StatelessWidget {
                       child: Text(
                         state.selectedDaysFood!.foodName,
                         textAlign: TextAlign.start,
-                        style: TextStyle(
+                        style: titleTextStyle(
                           fontSize: 18,
-                          fontWeight: FontWeight.w700,
                           color: AppColors.brownSugarColor,
-                          shadows: [
-                            Shadow(
-                              offset: const Offset(2.0, 2.0),
-                              blurRadius: 8,
-                              color: Colors.black.withOpacity(0.3),
-                            ),
-                          ],
                         ),
                       ),
                     ),
@@ -87,14 +69,8 @@ class FoodOfDayWidget extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
-                        color: AppColors.darkGreen.withOpacity(0.8),
-                        shadows: [
-                          Shadow(
-                            offset: const Offset(1.0, 1.0),
-                            blurRadius: 8,
-                            color: Colors.black.withOpacity(0.2),
-                          ),
-                        ],
+                        color: AppColors.grayColor,
+                        shadows: [textShadow()],
                       ),
                     ),
                     if (isAdmin)
@@ -105,10 +81,11 @@ class FoodOfDayWidget extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            ElevatedButton(
+                            Button(
                                 onPressed: () {},
-                                child: const Text(
+                                child: Text(
                                   "Edit",
+                                  style: buttonTextStyle(),
                                 )),
                             const SizedBox(
                               width: 12,
@@ -123,21 +100,40 @@ class FoodOfDayWidget extends StatelessWidget {
             } else {
               return Expanded(
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text("Todays plan not ready yet"),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 24,
+                      ),
+                      child: Image.network(
+                          "https://www.chetanbharat.com/Backend/assets/images/no-data.png"),
+                    ),
+                    const Text(
+                      "Todays plan not ready yet",
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
                     if (isAdmin)
-                      ElevatedButton(
-                        onPressed: () async {
-                          final result = await Navigator.of(context)
-                              .pushNamed('/foods') as Food?;
-                          if (result != null) {
-                            context.read<WeeklyPlanCubit>().addFood(
-                                  food: result,
-                                );
-                          }
-                        },
-                        child: const Text("Add"),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 18,
+                        ),
+                        child: Button(
+                          onPressed: () async {
+                            final result = await Navigator.of(context)
+                                .pushNamed('/foods') as Food?;
+                            if (result != null) {
+                              await context.read<WeeklyPlanCubit>().addFood(
+                                    food: result,
+                                  );
+                            }
+                          },
+                          child: Text(
+                            "Add",
+                            style: buttonTextStyle(),
+                          ),
+                        ),
                       )
                   ],
                 ),
