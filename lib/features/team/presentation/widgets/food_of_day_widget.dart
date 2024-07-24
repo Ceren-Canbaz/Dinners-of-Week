@@ -1,6 +1,7 @@
 import 'package:dinners_of_week/features/food/data/models/food.dart';
 import 'package:dinners_of_week/features/food/presentation/widgets/food_image_container.dart';
 import 'package:dinners_of_week/features/team/presentation/weekly_plan/cubit/weekly_plan_cubit.dart';
+import 'package:dinners_of_week/style/buttons.dart';
 import 'package:dinners_of_week/style/colors.dart';
 import 'package:dinners_of_week/utils/enums/request_state.dart';
 import 'package:flutter/material.dart';
@@ -112,11 +113,7 @@ class FoodOfDayWidget extends StatelessWidget {
                             const SizedBox(
                               width: 12,
                             ),
-                            ElevatedButton(
-                                onPressed: () {},
-                                child: const Text(
-                                  "Delete",
-                                )),
+                            DeleteButton(onDelete: () {}, title: "Delete")
                           ],
                         ),
                       )

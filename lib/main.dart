@@ -43,8 +43,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.eggshellColor,
-            foregroundColor: AppColors.grayColor,
+            backgroundColor: AppColors.darkGreen,
+            foregroundColor: Colors.white,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12), // Kenarları yuvarlat
             ),
@@ -55,8 +55,8 @@ class MyApp extends StatelessWidget {
               fontWeight: FontWeight.bold, // Yazı kalınlığı
             ),
             elevation: 5, // Gölgeler
-            shadowColor: AppColors.grayColor
-                .withOpacity(0.5), // Gölge rengi ve şeffaflık
+            shadowColor:
+                Colors.black.withOpacity(0.15), // Gölge rengi ve şeffaflık
           ),
         ),
       ),
