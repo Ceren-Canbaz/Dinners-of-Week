@@ -3,12 +3,14 @@ import 'package:dinners_of_week/features/team/presentation/team/team_bloc/team_b
 import 'package:dinners_of_week/auth/data/models/team_user.dart';
 import 'package:dinners_of_week/features/team/data/models/team.dart';
 import 'package:dinners_of_week/features/team/domain/teams_repository.dart';
+
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class TeamPage extends StatefulWidget {
-  const TeamPage({super.key, required this.user});
+  TeamPage({super.key, required this.user});
 
   ///TODO: move to initial and make singleton.
   final TeamUser user;
@@ -103,21 +105,21 @@ class _TeamPageState extends State<TeamPage> {
                           const SizedBox(
                             height: 24,
                           ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 64.0,
-                            ),
-                            child: BlocConsumer<TeamBloc, TeamState>(
-                              listener: (context, state) {
-                                if (state is TeamJoinedState) {
-                                  Navigator.of(context).pushReplacementNamed(
-                                      "/team_home",
-                                      arguments: TeamHomePageParameters(
-                                          user: state.user, team: state.team));
-                                }
-                              },
-                              builder: (context, state) {
-                                return TextField(
+                          BlocConsumer<TeamBloc, TeamState>(
+                            listener: (context, state) {
+                              if (state is TeamJoinedState) {
+                                Navigator.of(context).pushReplacementNamed(
+                                    "/team_home",
+                                    arguments: TeamHomePageParameters(
+                                        user: state.user, team: state.team));
+                              }
+                            },
+                            builder: (context, state) {
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 20,
+                                ),
+                                child: TextField(
                                   onSubmitted: (value) {
                                     BlocProvider.of<TeamBloc>(context).add(
                                       TeamJoinEvent(
@@ -136,13 +138,13 @@ class _TeamPageState extends State<TeamPage> {
                                           BorderSide(color: Colors.white),
                                     ),
                                   ),
-                                );
-                              },
-                            ),
+                                ),
+                              );
+                            },
                           ),
                           const SizedBox(
                             height: 24,
-                          )
+                          ),
                         ],
                       ),
                     ),
@@ -193,7 +195,7 @@ class _TeamPageState extends State<TeamPage> {
                           ),
                           Padding(
                               padding: const EdgeInsets.symmetric(
-                                horizontal: 64.0,
+                                horizontal: 20,
                               ),
                               child: BlocConsumer<TeamBloc, TeamState>(
                                   listener: (context, state) {
@@ -232,14 +234,6 @@ class _TeamPageState extends State<TeamPage> {
                     ),
                   ],
                 ),
-                IconButton(
-                    onPressed: () async {
-                      final prefs = await SharedPreferences.getInstance();
-
-                      await prefs.remove('dowUsername');
-                      setState(() {});
-                    },
-                    icon: const Icon(Icons.run_circle))
               ],
             ),
           ),
