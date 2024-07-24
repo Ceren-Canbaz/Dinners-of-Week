@@ -73,6 +73,7 @@ class WeeklyPlanCubit extends Cubit<WeeklyPlanState> {
     emit(
       state.copyWith(
         weekDays: weekdays,
+        selectedDate: now,
       ),
     );
   }
