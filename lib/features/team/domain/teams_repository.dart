@@ -67,7 +67,7 @@ class TeamsRepository {
     }
   }
 
-  Future<void> addFoodTeamCalendar({
+  Future<void> addFoodToCalendar({
     required String teamId,
     required String foodId,
     required DateTime date,
@@ -79,6 +79,24 @@ class TeamsRepository {
           'foodId': foodId,
           'date': date.toIso8601String(),
         },
+      );
+    } catch (e) {
+      throw Exception();
+    }
+  }
+
+  Future<void> editCalendar({
+    required String id,
+    required String foodId,
+  }) async {
+    try {
+      await supabase.from("weekly_food").update(
+        {
+          'foodId': foodId,
+        },
+      ).eq(
+        "id",
+        id,
       );
     } catch (e) {
       throw Exception();

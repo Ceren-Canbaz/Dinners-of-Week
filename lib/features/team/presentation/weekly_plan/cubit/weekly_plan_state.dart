@@ -5,7 +5,7 @@ class WeeklyPlanState extends Equatable {
   final RequestState requestState;
   final DateTime selectedDate;
   final List<DateTime> weekDays;
-  final TeamFoodDetails? selectedDaysFood;
+  final TeamFoodDetails selectedDaysFood;
 
   const WeeklyPlanState({
     required this.foods,
@@ -16,12 +16,8 @@ class WeeklyPlanState extends Equatable {
   });
 
   @override
-  List<Object> get props => [
-        foods,
-        requestState,
-        weekDays,
-        selectedDate,
-      ];
+  List<Object> get props =>
+      [foods, requestState, weekDays, selectedDate, selectedDaysFood];
 
   WeeklyPlanState copyWith(
       {List<TeamFoodDetails>? foods,
@@ -30,10 +26,11 @@ class WeeklyPlanState extends Equatable {
       List<DateTime>? weekDays,
       TeamFoodDetails? selectedDaysFood}) {
     return WeeklyPlanState(
-        foods: foods ?? this.foods,
-        requestState: requestState ?? this.requestState,
-        selectedDate: selectedDate ?? this.selectedDate,
-        weekDays: weekDays ?? this.weekDays,
-        selectedDaysFood: selectedDaysFood);
+      foods: foods ?? this.foods,
+      requestState: requestState ?? this.requestState,
+      selectedDate: selectedDate ?? this.selectedDate,
+      weekDays: weekDays ?? this.weekDays,
+      selectedDaysFood: selectedDaysFood ?? this.selectedDaysFood,
+    );
   }
 }

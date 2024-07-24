@@ -34,7 +34,7 @@ class FoodOfDayWidget extends StatelessWidget {
             );
 
           case RequestState.loaded:
-            if (state.selectedDaysFood != null) {
+            if (state.selectedDaysFood.id != "") {
               return Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 12,
@@ -52,7 +52,7 @@ class FoodOfDayWidget extends StatelessWidget {
                         style: titleTextStyle(),
                       ),
                     ),
-                    ImageContainer(imageUrl: state.selectedDaysFood!.imageUrl),
+                    ImageContainer(imageUrl: state.selectedDaysFood.imageUrl),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 12),
                       child: Text(
@@ -65,7 +65,7 @@ class FoodOfDayWidget extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      state.selectedDaysFood!.foodDescription,
+                      state.selectedDaysFood.foodDescription,
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
@@ -82,7 +82,15 @@ class FoodOfDayWidget extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             Button(
-                                onPressed: () {},
+                                onPressed: () async {
+                                  final result = await Navigator.of(context)
+                                      .pushNamed('/foods') as Food?;
+                                  if (result != null) {
+                                    await context
+                                        .read<WeeklyPlanCubit>()
+                                        .edit(foodId: result.id);
+                                  }
+                                },
                                 child: Text(
                                   "Edit",
                                   style: buttonTextStyle(),

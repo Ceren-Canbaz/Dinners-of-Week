@@ -21,7 +21,7 @@ class WeeklyPlanCubit extends Cubit<WeeklyPlanState> {
             requestState: RequestState.initial,
             selectedDate: DateTime.now(),
             weekDays: const [],
-            selectedDaysFood: null,
+            selectedDaysFood: TeamFoodDetails.empty(),
           ),
         ) {
     _setWeekDays();
@@ -50,9 +50,10 @@ class WeeklyPlanCubit extends Cubit<WeeklyPlanState> {
       }
       emit(
         state.copyWith(
-            requestState: RequestState.loaded,
-            foods: foods,
-            selectedDaysFood: selectedDaysFood),
+          requestState: RequestState.loaded,
+          foods: foods,
+          selectedDaysFood: selectedDaysFood,
+        ),
       );
     } catch (e) {
       emit(
@@ -67,13 +68,31 @@ class WeeklyPlanCubit extends Cubit<WeeklyPlanState> {
     required Food food,
   }) async {
     try {
-      await _repo.addFoodTeamCalendar(
+      await _repo.addFoodToCalendar(
         teamId: _teamId,
         foodId: food.id,
         date: state.selectedDate,
       );
       await getWeeklyFoodList(teamId: _teamId);
     } catch (e) {}
+  }
+
+  Future<void> edit({required String foodId}) async {
+    try {
+      emit(
+        state.copyWith(
+          requestState: RequestState.loading,
+        ),
+      );
+      await _repo.editCalendar(id: state.selectedDaysFood.id, foodId: foodId);
+      await getWeeklyFoodList(teamId: _teamId);
+    } catch (e) {
+      emit(
+        state.copyWith(
+          requestState: RequestState.error,
+        ),
+      );
+    }
   }
 
   void _setWeekDays() {
